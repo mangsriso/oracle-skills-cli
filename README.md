@@ -165,21 +165,22 @@ Oracle skills extend your agent's capabilities with specialized workflows:
 | - |  |  |  |
 | 13 | **awaken** | skill | Guided Oracle birth |
 | 14 | **birth** | skill | Prepare birth props for a new Oracle repo |
-| 15 | **feel** | skill | Log emotions with optional structure |
-| 16 | **forward** | skill | Create handoff + enter plan mode for next |
-| 17 | **fyi** | skill | Log information for future reference |
-| 18 | **merged** | skill | Post-Merge Cleanup |
-| 19 | **oracle** | skill | Manage Oracle skills and profiles |
-| 20 | **oracle-family-scan** | skill | Manage Oracle family |
-| 21 | **oracle-soul-sync-update** | skill | Sync Oracle instruments with the family |
-| 22 | **philosophy** | skill | Display Oracle philosophy principles |
-| 23 | **retrospective** | skill | Create session retrospective with AI diary |
-| 24 | **standup** | skill | Daily standup check |
-| 25 | **where-we-are** | skill | Session awareness - alias for /recap --now |
-| 26 | **who-are-you** | skill | Know ourselves |
-| 27 | **worktree** | skill | Git worktree for parallel work |
+| 15 | **dig** | skill | Mine Claude Code sessions |
+| 16 | **feel** | skill | Log emotions with optional structure |
+| 17 | **forward** | skill | Create handoff + enter plan mode for next |
+| 18 | **fyi** | skill | Log information for future reference |
+| 19 | **merged** | skill | Post-Merge Cleanup |
+| 20 | **oracle** | skill | Manage Oracle skills and profiles |
+| 21 | **oracle-family-scan** | skill | Manage Oracle family |
+| 22 | **oracle-soul-sync-update** | skill | Sync Oracle instruments with the family |
+| 23 | **philosophy** | skill | Display Oracle philosophy principles |
+| 24 | **retrospective** | skill | Create session retrospective with AI diary |
+| 25 | **standup** | skill | Daily standup check |
+| 26 | **where-we-are** | skill | Session awareness - alias for /recap --now |
+| 27 | **who-are-you** | skill | Know ourselves |
+| 28 | **worktree** | skill | Git worktree for parallel work |
 
-*Generated: 2026-02-22 11:27:50 UTC*
+*Generated: 2026-02-22 12:41:47 UTC*
 
 ## Supported Agents
 

@@ -6,20 +6,19 @@
  * - Both empty = install everything (same as current default)
  */
 export const profiles: Record<string, { include?: string[]; exclude?: string[] }> = {
-  core: {
-    include: [
-      'trace', 'recap', 'rrr', 'forward', 'learn', 'project',
-      'who-are-you', 'fyi', 'where-we-are', 'feel',
-      'oracle-soul-sync-update', 'oracle',
-    ],
+  seed: {
+    include: ['trace', 'dig', 'recap', 'learn', 'rrr', 'who-are-you'],
   },
   minimal: {
-    include: ['trace', 'recap', 'rrr', 'forward', 'fyi'],
+    include: ['trace', 'dig', 'recap', 'learn', 'rrr', 'who-are-you'],
+  },
+  standard: {
+    include: [
+      'trace', 'dig', 'recap', 'learn', 'rrr', 'who-are-you',
+      'worktree', 'oracle', 'standup', 'forward', 'fyi', 'merged',
+    ],
   },
   full: {}, // all skills (default behavior)
-  'post-awaken': {
-    exclude: ['awaken', 'birth'],
-  },
 };
 
 /**

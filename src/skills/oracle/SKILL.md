@@ -80,7 +80,7 @@ oracle-skills profiles
 
 Switch to a profile (installs that profile's skill set).
 
-Profiles: `core`, `minimal`, `full`, `post-awaken`
+Profiles: `seed`/`minimal` (6 skills), `standard` (12 skills), `full` (all)
 
 ```bash
 oracle-skills install -g -y --profile <name>
@@ -118,7 +118,7 @@ oracle-skills list -g
 |---------|--------|
 | `/oracle prepare` | Check & install git, gh, ghq; set up gh auth |
 | `/oracle profile` | List available profiles |
-| `/oracle profile core` | Switch to core profile |
+| `/oracle profile seed` | Switch to seed profile |
 | `/oracle install <skill>` | Install one skill |
 | `/oracle remove <skill>` | Remove one skill |
 | `/oracle skills` | List installed skills |
