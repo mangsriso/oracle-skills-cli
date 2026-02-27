@@ -10,7 +10,8 @@ Create context for next session, then enter plan mode to define next steps.
 ## Usage
 
 ```
-/forward              # Create handoff + enter plan mode (default)
+/forward              # Create handoff, show plan, wait for approval
+/forward asap         # Create handoff + commit immediately (no approval needed)
 /forward --only       # Create handoff only, skip plan mode
 ```
 
@@ -23,7 +24,11 @@ Create context for next session, then enter plan mode to define next steps.
 
 ## Output
 
-Write to: `ψ/inbox/handoff/YYYY-MM-DD_HH-MM_slug.md`
+Write to: `~/.oracle/ψ/inbox/handoff/YYYY-MM-DD_HH-MM_slug.md`
+
+**IMPORTANT**: Write to the vault path (`~/.oracle/ψ/`), NOT the local `ψ/` symlink.
+The `ψ/` directory in repos is a symlink — `git add` through symlinks will fail.
+The vault is shared state, not committed to any repo.
 
 ```markdown
 # Handoff: [Session Focus]
@@ -48,59 +53,35 @@ Write to: `ψ/inbox/handoff/YYYY-MM-DD_HH-MM_slug.md`
 - [Important file 2]
 ```
 
-## Then
+## Then: Plan Mode for Approval
 
-After creating handoff:
-1. Commit: `git add -A && git commit -m "handoff: [slug]"`
-2. Push: `git push origin main`
-3. **Enter plan mode** for next session planning
+**Do NOT commit the handoff file** — it lives in the vault, not the repo.
+After writing the handoff:
 
-## Auto Plan Mode (REQUIRED)
+1. **Call `EnterPlanMode`** tool
+3. In plan mode, write a plan file with:
+   - What we accomplished this session
+   - Pending items carried forward
+   - Next session goals and scope
+   - Reference to handoff file path
+4. **Call `ExitPlanMode`** — user sees the built-in plan approval UI
 
-**CRITICAL**: After commit & push succeeds, you MUST enter plan mode:
+The user gets the standard plan approval screen with options to approve, modify, or reject. This is the proper way to show plans.
 
-### Step 1: Call EnterPlanMode Tool
+If user calls `/forward` again — just show the existing plan, do not re-create the handoff file.
 
-```
-⚠️ REQUIRED ACTION: Call the EnterPlanMode tool NOW
-```
+## ASAP Mode
 
-Do NOT skip this step. Do NOT ask user if they want plan mode.
-Just call `EnterPlanMode` tool immediately after push.
-
-### Step 2: In Plan Mode
-
-Write a plan file that:
-- References the handoff file just created
-- Lists pending tasks from handoff
-- Defines next session scope
-
-**Plan template:**
-```markdown
-# Plan: [Next Session Focus]
-
-## Background
-[Summary from handoff: What We Did]
-
-## Pending from Last Session
-[Copy Pending items from handoff]
-
-## Next Session Goals
-[Copy Next Session items from handoff]
-
-## Reference
-- Handoff: ψ/inbox/handoff/YYYY-MM-DD_HH-MM_slug.md
-```
-
-### Step 3: Exit Plan Mode
-
-Call `ExitPlanMode` tool when plan is complete.
-After approval → Ready for `/compact` then `/clear`
+If user says `/forward asap` or `/forward now`:
+- Write handoff file
+- **Immediately commit and push** — no approval needed
+- Skip plan mode
+- User wants to close fast
 
 ## Skip Plan Mode
 
-If user says `/forward --only` or context is very low:
-- Skip plan mode
+If user says `/forward --only`:
+- Skip plan mode after commit
 - Just tell user: "💡 Run /plan to plan next session"
 
 ARGUMENTS: $ARGUMENTS

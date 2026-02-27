@@ -7,6 +7,7 @@ export interface AgentConfig {
   globalCommandsDir?: string;
   useFlatFiles?: boolean; // Use skillname.md instead of skillname/SKILL.md (OpenCode commands)
   commandsOptIn?: boolean; // Only install commands with --commands flag (default: false = always install)
+  commandFormat?: 'md' | 'toml'; // Command stub format (default: 'md')
   detectInstalled: () => boolean;
 }
 

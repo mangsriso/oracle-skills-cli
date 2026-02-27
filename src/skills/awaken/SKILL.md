@@ -628,13 +628,9 @@ This creates a retrospective with:
 - Problems/friction encountered
 - Lessons learned during awakening
 
-The retrospective goes to `ψ/memory/retrospectives/` — commit and push it:
+The retrospective is written to the vault (`~/.oracle/ψ/memory/retrospectives/`).
 
-```bash
-git add ψ/memory/retrospectives/ ψ/memory/learnings/
-git commit -m "rrr: awakening retrospective"
-git push origin main
-```
+**Do NOT `git add ψ/`** — it's a symlink to the vault. Vault files are shared state, not committed to repos.
 
 **Duration**: ~3 minutes
 

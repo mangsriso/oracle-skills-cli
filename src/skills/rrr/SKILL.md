@@ -69,12 +69,11 @@ Write immediately, no prompts. If pulse data was found, weave it into the narrat
 oracle_learn({ pattern: [lesson content], concepts: [tags], source: "rrr: REPO" })
 ```
 
-### 5. Commit
+### 5. Save
 
-```bash
-git add ψ/memory/retrospectives/ ψ/memory/learnings/
-git commit -m "rrr: [slug]"
-```
+Retro files are written to vault (`~/.oracle/ψ/memory/retrospectives/`).
+
+**Do NOT `git add ψ/`** — it's a symlink to the vault. Vault files are shared state, not committed to repos.
 
 ---
 
@@ -138,12 +137,9 @@ Also run pulse context (step 1.5 from default mode) and weave into narrative.
 
 ### 3-5. Same as default steps 3-5
 
-Write lesson learned, oracle sync, commit.
+Write lesson learned, oracle sync.
 
-```bash
-git add ψ/memory/retrospectives/ ψ/memory/learnings/
-git commit -m "rrr: dig - [slug]"
-```
+**Do NOT `git add ψ/`** — vault files are shared state, not committed to repos.
 
 ---
 

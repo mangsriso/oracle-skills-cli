@@ -322,11 +322,30 @@ bunx --bun oracle-skills@github:Soul-Brews-Studio/oracle-skills-cli#v${pkg.versi
       const scopeChar = scope === 'Global' ? 'G' : 'L';
       const skillsPath = options.global ? agent.globalSkillsDir : join(process.cwd(), agent.skillsDir);
       
+      const cmdFormat = agent.commandFormat || 'md';
+
       for (const skill of skillsToInstall) {
         const skillMdPath = join(targetDir, skill.name, 'SKILL.md');
         if (existsSync(skillMdPath)) {
-          // Create stub that points to full skill in skills/
-          const stubContent = `---
+          if (cmdFormat === 'toml') {
+            // Gemini CLI: .toml slash commands
+            const desc = skill.description.replace(/"/g, '\\"');
+            const tomlContent = `description = "v${pkg.version} ${scopeChar}-CMD | ${desc}"
+prompt = """
+You are running the /${skill.name} skill.
+
+Read the skill file at ${skillsPath}/${skill.name}/SKILL.md and follow ALL instructions in it.
+
+Arguments: {{args}}
+
+---
+oracle-skills-cli v${pkg.version}
+"""
+`;
+            await Bun.write(join(commandsDir, `${skill.name}.toml`), tomlContent);
+          } else {
+            // Claude Code, OpenCode, etc.: .md slash commands
+            const stubContent = `---
 description: v${pkg.version} ${scopeChar}-CMD | ${skill.description}
 allowed-tools:
   - Bash
@@ -350,8 +369,8 @@ Execute the \`${skill.name}\` skill with args: \`$ARGUMENTS\`
 ---
 *oracle-skills-cli v${pkg.version}*
 `;
-          const commandPath = join(commandsDir, `${skill.name}.md`);
-          await Bun.write(commandPath, stubContent);
+            await Bun.write(join(commandsDir, `${skill.name}.md`), stubContent);
+          }
         }
       }
       p.log.success(`${agent.displayName} commands: ${commandsDir}`);
@@ -394,7 +413,8 @@ Execute the \`${skill.name}\` skill with args: \`$ARGUMENTS\`
             // Clean up commands/ flat files
             if (agent.commandsDir) {
               const commandsDir = options.global ? agent.globalCommandsDir! : join(process.cwd(), agent.commandsDir);
-              const flatFile = join(commandsDir, `${skill}.md`);
+              const ext = agent.commandFormat === 'toml' ? 'toml' : 'md';
+              const flatFile = join(commandsDir, `${skill}.${ext}`);
               if (existsSync(flatFile)) await rmf(flatFile, shellMode);
             }
 
@@ -457,10 +477,11 @@ export async function uninstallSkills(
       const skillPath = join(targetDir, skill);
       await rmrf(skillPath, shellMode);
 
-      // Clean up commands/ flat files (OpenCode, Claude Code, etc.)
+      // Clean up commands/ flat files (OpenCode, Claude Code, Gemini, etc.)
       if (agent.commandsDir) {
         const commandsDir = options.global ? agent.globalCommandsDir! : join(process.cwd(), agent.commandsDir);
-        const flatFile = join(commandsDir, `${skill}.md`);
+        const ext = agent.commandFormat === 'toml' ? 'toml' : 'md';
+        const flatFile = join(commandsDir, `${skill}.${ext}`);
         if (existsSync(flatFile)) await rmf(flatFile, shellMode);
         // Also clean up old command/ directory format if exists (legacy cleanup)
         const oldCommandDir = commandsDir.replace('/commands', '/command');

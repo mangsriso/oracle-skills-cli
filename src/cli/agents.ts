@@ -74,6 +74,10 @@ export const agents: Record<AgentType, AgentConfig> = {
     displayName: 'Gemini CLI',
     skillsDir: '.gemini/skills',
     globalSkillsDir: join(home, '.gemini/skills'),
+    commandsDir: '.gemini/commands',
+    globalCommandsDir: join(home, '.gemini/commands'),
+    useFlatFiles: true,
+    commandFormat: 'toml',
     detectInstalled: () => existsSync(join(home, '.gemini')),
   },
   antigravity: {

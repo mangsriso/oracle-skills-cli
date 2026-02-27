@@ -84,3 +84,6 @@ for (const line of cal.split("\n")) {
   
   console.log(marked + suffix + annotations.join(" "));
 }
+
+console.log(`\n📄 \`${scheduleFile}\``);
+

@@ -45,7 +45,7 @@ switch (filter.toLowerCase()) {
     break;
   case "upcoming":
     params.set("from", todayStr());
-    params.set("to", addDays(todayStr(), 30));
+    params.set("to", addDays(todayStr(), 60));
     break;
   case "month":
     {

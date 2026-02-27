@@ -26,7 +26,31 @@ Run the query script:
 bun .claude/skills/schedule/scripts/query.ts [filter]
 ```
 
-The script queries `GET /api/schedule` on the Oracle HTTP server (port 47778) and formats the response as a markdown table.
+The script queries `GET /api/schedule` on the Oracle HTTP server (port 47778).
+
+## Output Format
+
+**Do NOT show raw bash output.** Parse the script output and render as a box-drawn table:
+
+```
+Upcoming (5 events)
+
+┌────────┬───────┬──────────────────────────────────┐
+│  Date  │ Time  │ Event                            │
+├────────┼───────┼──────────────────────────────────┤
+│ Mar 1  │ TBD   │ งานบ้านสมาธิ ครั้ง 4                  │
+├────────┼───────┼──────────────────────────────────┤
+│ Mar 10 │ 15:00 │ นัดอ.เศรษฐ์ (ที่คลินิก)                │
+└────────┴───────┴──────────────────────────────────┘
+
+📄 `~/.oracle/ψ/inbox/schedule.md`
+```
+
+Rules:
+- Merge Notes into Event column (parenthesized if short, omit if too long)
+- Hide Status column unless `all` filter (done/cancelled rows exist)
+- Show ground truth file path at the bottom
+- Title: filter name + count, e.g. "Upcoming (5 events)", "March (8 events)"
 
 ## API Reference
 
