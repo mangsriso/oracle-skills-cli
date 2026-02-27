@@ -2,6 +2,7 @@
 // Query schedule via Oracle HTTP API (backed by Drizzle DB)
 // Usage: bun query.ts [filter]
 // Filters: today, tomorrow, week, month, march, <keyword>
+export {};
 
 const filter = process.argv[2] || "upcoming";
 const API = process.env.ORACLE_API || "http://localhost:47778";
