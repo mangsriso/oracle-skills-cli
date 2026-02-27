@@ -44,7 +44,10 @@ cat ψ/inbox/focus*.md 2>/dev/null | head -20
 
 ### 3. Schedule/Appointments
 ```bash
-cat ψ/inbox/schedule.md 2>/dev/null | head -30
+SCHEDULE="${HOME}/.oracle/ψ/inbox/schedule.md"
+[ ! -f "$SCHEDULE" ] && SCHEDULE="ψ/memory/resonance/schedule.md"
+[ ! -f "$SCHEDULE" ] && SCHEDULE="ψ/inbox/schedule.md"
+cat "$SCHEDULE" 2>/dev/null | head -30
 ```
 
 ### 4. Recent Progress (24h)

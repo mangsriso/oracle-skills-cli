@@ -5,6 +5,7 @@
 import { $ } from "bun";
 import { existsSync } from "fs";
 import { join } from "path";
+import { resolveSchedule } from "../_shared/vault-paths";
 
 // Get repo root
 const root = (await $`git rev-parse --show-toplevel 2>/dev/null`.text()).trim() || process.cwd();
@@ -32,7 +33,7 @@ if (existsSync(focusFile)) {
 
 // Schedule
 let schedule = "No schedule";
-const scheduleFile = join(root, "ψ/inbox/schedule.md");
+const scheduleFile = resolveSchedule(root);
 if (existsSync(scheduleFile)) {
   const scheduleContent = await Bun.file(scheduleFile).text();
   const today = new Date();

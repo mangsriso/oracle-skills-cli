@@ -3,6 +3,7 @@ import { Glob } from "bun";
 import { existsSync, lstatSync, readlinkSync } from "fs";
 import { join, basename, dirname } from "path";
 import { homedir } from "os";
+import { resolveSlugs } from "../../_shared/vault-paths";
 
 // --- Environment ---
 export function getRoot(): string {
@@ -16,7 +17,7 @@ export function getRoot(): string {
 
 export function getPaths(root: string) {
   return {
-    slugsFile: join(root, "ψ/memory/slugs.yaml"),
+    slugsFile: resolveSlugs(root),
     learnDir: join(root, "ψ/learn/repo/github.com"),
     incubateDir: join(root, "ψ/incubate/repo/github.com"),
     logDir: join(root, "ψ/memory/logs"),

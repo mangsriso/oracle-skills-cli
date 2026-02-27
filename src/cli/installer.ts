@@ -46,7 +46,7 @@ export async function discoverSkills(): Promise<Skill[]> {
   }
 
   const skillDirs = readdirSync(skillsPath, { withFileTypes: true })
-    .filter((d) => d.isDirectory() && !d.name.startsWith('.') && d.name !== '_template')
+    .filter((d) => d.isDirectory() && !d.name.startsWith('.') && d.name !== '_template' && d.name !== '_shared')
     .map((d) => d.name);
 
   const skills: Skill[] = [];
@@ -197,6 +197,16 @@ export async function installSkills(
       if (failedMoves.length > 0) {
         p.log.warn(`LLM: Please remove manually: ${failedMoves.join(', ')}`);
       }
+    }
+
+    // Copy _shared/ utilities (vault-paths, etc.)
+    const sharedSrc = join(getSkillsDir(), '_shared');
+    if (existsSync(sharedSrc)) {
+      const sharedDest = join(targetDir, '_shared');
+      if (existsSync(sharedDest)) {
+        await rmrf(sharedDest, shellMode);
+      }
+      await cpr(sharedSrc, sharedDest, shellMode);
     }
 
     // All agents: copy full skill directory to skills/

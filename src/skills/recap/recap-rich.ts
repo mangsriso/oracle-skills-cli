@@ -3,6 +3,7 @@
 import { $ } from "bun";
 import { existsSync, readdirSync } from "fs";
 import { join, basename } from "path";
+import { resolveSchedule } from "../_shared/vault-paths";
 
 const ROOT = process.env.ROOT || (await $`git rev-parse --show-toplevel`.text().catch(() => process.cwd())).trim();
 await $`git -C ${ROOT} config core.quotePath false`.quiet().catch(() => {});
@@ -29,7 +30,7 @@ if (existsSync(focusFile)) {
 
 // Schedule
 console.log("\n## TODAY");
-const scheduleFile = join(ROOT, "ψ/inbox/schedule.md");
+const scheduleFile = resolveSchedule(ROOT);
 if (existsSync(scheduleFile)) {
   const schedule = await Bun.file(scheduleFile).text();
   const todayNum = now.getDate();
