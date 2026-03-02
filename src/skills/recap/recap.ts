@@ -3,9 +3,8 @@
 // Usage: bun recap.ts
 
 import { $ } from "bun";
-import { existsSync } from "fs";
+import { existsSync, realpathSync } from "fs";
 import { join } from "path";
-import { homedir } from "os";
 
 // Get repo root
 const root = (await $`git rev-parse --show-toplevel 2>/dev/null`.text()).trim() || process.cwd();
@@ -31,10 +30,10 @@ if (existsSync(focusFile)) {
   if (taskMatch) focusTask = taskMatch[1].trim().slice(0, 80);
 }
 
-// Schedule (vault-first) — grab first event row from schedule.md
+// Schedule — resolve ψ symlink
 let schedule = "No schedule";
-const vaultSchedule = join(homedir(), ".oracle", "ψ", "inbox", "schedule.md");
-const scheduleFile = existsSync(vaultSchedule) ? vaultSchedule : join(root, "ψ/inbox/schedule.md");
+const psi = existsSync("ψ") ? realpathSync("ψ") : "ψ";
+const scheduleFile = join(psi, "inbox", "schedule.md");
 if (existsSync(scheduleFile)) {
   const match = (await Bun.file(scheduleFile).text()).split('\n')
     .find(l => l.startsWith('| ') && !l.includes('---') && !l.includes('Date'));

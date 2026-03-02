@@ -33,7 +33,7 @@
     "cli",
     "bun"
   ],
-  "author": "Soul Brews Studio",
+  "author": "Nat Weerawan <nat@soulbrews.studio> (https://github.com/nazt)",
   "license": "MIT",
   "repository": {
     "type": "git",

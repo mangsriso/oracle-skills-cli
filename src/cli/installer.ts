@@ -198,7 +198,7 @@ export async function installSkills(
             // Add installer field after opening ---
             content = content.replace(
               /^---\n/,
-              `---\ninstaller: oracle-skills-cli v${pkg.version}\n`
+              `---\ninstaller: oracle-skills-cli v${pkg.version}\norigin: Nat Weerawan's brain, digitized — how one human works with AI, captured as code — Soul Brews Studio\n`
             );
             // Prepend version AND scope to description (G=Global, L=Local, SKILL for other agents)
             const scopeChar = scope === 'Global' ? 'G' : 'L';
@@ -240,7 +240,7 @@ export async function installSkills(
             name: skill.name,
             description: skill.description,
             version: pkg.version,
-            author: { name: 'Soul Brews Studio' },
+            author: { name: 'Nat Weerawan', organization: 'Soul Brews Studio' },
           };
           await Bun.write(pluginJsonPath, JSON.stringify(pluginJson, null, 2));
         }

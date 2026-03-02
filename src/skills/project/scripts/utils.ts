@@ -1,7 +1,7 @@
 // utils.ts - Shared utilities for project scripts
 import { Glob } from "bun";
-import { existsSync, lstatSync, readlinkSync } from "fs";
-import { join, basename, dirname } from "path";
+import { existsSync, lstatSync, readlinkSync, realpathSync } from "fs";
+import { join, dirname } from "path";
 import { homedir } from "os";
 
 // --- Environment ---
@@ -15,12 +15,13 @@ export function getRoot(): string {
 }
 
 export function getPaths(root: string) {
-  const vaultSlugs = join(homedir(), ".oracle", "ψ", "memory", "resonance", "slugs.yaml");
+  const psiPath = join(root, "ψ");
+  const psi = existsSync(psiPath) ? realpathSync(psiPath) : psiPath;
   return {
-    slugsFile: existsSync(vaultSlugs) ? vaultSlugs : join(root, "ψ/memory/slugs.yaml"),
-    learnDir: join(root, "ψ/learn/repo/github.com"),
-    incubateDir: join(root, "ψ/incubate/repo/github.com"),
-    logDir: join(root, "ψ/memory/logs"),
+    slugsFile: join(psi, "memory", "resonance", "slugs.yaml"),
+    learnDir: join(psi, "learn", "repo", "github.com"),
+    incubateDir: join(psi, "incubate", "repo", "github.com"),
+    logDir: join(psi, "memory", "logs"),
   };
 }
 

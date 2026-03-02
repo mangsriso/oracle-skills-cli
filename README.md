@@ -127,7 +127,7 @@ Oracle skills extend your agent's capabilities with specialized workflows:
 | 28 | **who-are-you** | skill | Know ourselves |
 | 29 | **worktree** | skill | Git worktree for parallel work |
 
-*Generated: 2026-03-02 04:05:44 UTC*
+*Generated: 2026-03-02 04:40:23 UTC*
 
 ## Supported Agents
 
@@ -151,6 +151,14 @@ Oracle skills extend your agent's capabilities with specialized workflows:
 | Aider | `.aider/skills/` | `~/.aider/skills/` |
 | Continue | `.continue/skills/` | `~/.continue/skills/` |
 | Zed | `.zed/skills/` | `~/.zed/skills/` |
+
+## Origin
+
+Digitized from **Nat Weerawan**'s brain ([@nazt](https://github.com/nazt)) — [Soul Brews Studio](https://github.com/Soul-Brews-Studio).
+
+These skills are patterns from thousands of hours working alongside AI agents — how to start a session, how to end one well, how to carry context forward, how to reflect. Every skill here was a real workflow before it became code.
+
+> Each installed skill carries an `origin` field in its frontmatter — the brain it came from travels with it.
 
 ## Philosophy
 

@@ -1,13 +1,13 @@
 #!/usr/bin/env bun
 // calendar.ts - Show month calendar with annotations
 import { $ } from "bun";
-import { existsSync } from "fs";
+import { existsSync, realpathSync } from "fs";
 import { join } from "path";
-import { homedir } from "os";
 
 const ROOT = process.env.ROOT || process.cwd();
-const vaultSchedule = join(homedir(), ".oracle", "ψ", "inbox", "schedule.md");
-const scheduleFile = existsSync(vaultSchedule) ? vaultSchedule : join(ROOT, "ψ/inbox/schedule.md");
+const psiPath = join(ROOT, "ψ");
+const psi = existsSync(psiPath) ? realpathSync(psiPath) : psiPath;
+const scheduleFile = join(psi, "inbox", "schedule.md");
 
 const now = new Date();
 const todayNum = now.getDate();

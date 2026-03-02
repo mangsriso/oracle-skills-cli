@@ -24,11 +24,16 @@ Create context for next session, then enter plan mode to define next steps.
 
 ## Output
 
-Write to: `~/.oracle/ψ/inbox/handoff/YYYY-MM-DD_HH-MM_slug.md`
+Resolve vault path first:
+```bash
+PSI=$(readlink -f ψ 2>/dev/null || echo "ψ")
+```
 
-**IMPORTANT**: Write to the vault path (`~/.oracle/ψ/`), NOT the local `ψ/` symlink.
-The `ψ/` directory in repos is a symlink — `git add` through symlinks will fail.
-The vault is shared state, not committed to any repo.
+Write to: `$PSI/inbox/handoff/YYYY-MM-DD_HH-MM_slug.md`
+
+**IMPORTANT**: Always use the resolved `$PSI` path, never the `ψ/` symlink directly.
+This ensures handoffs go to the project's vault (wherever ψ points).
+Do NOT `git add` vault files — they are shared state, not committed to repos.
 
 ```markdown
 # Handoff: [Session Focus]

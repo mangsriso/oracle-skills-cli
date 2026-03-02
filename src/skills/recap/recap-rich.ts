@@ -1,9 +1,8 @@
 #!/usr/bin/env bun
 // recap-rich.ts - Full context recap
 import { $ } from "bun";
-import { existsSync, readdirSync } from "fs";
+import { existsSync, readdirSync, realpathSync } from "fs";
 import { join } from "path";
-import { homedir } from "os";
 
 const ROOT = process.env.ROOT || (await $`git rev-parse --show-toplevel`.text().catch(() => process.cwd())).trim();
 await $`git -C ${ROOT} config core.quotePath false`.quiet().catch(() => {});
@@ -28,10 +27,11 @@ if (existsSync(focusFile)) {
   console.log("No focus file");
 }
 
-// Schedule (vault-first) — file only has pending events, already sorted
+// Schedule — resolve ψ symlink
 console.log("\n## UPCOMING");
-const vaultSchedule = join(homedir(), ".oracle", "ψ", "inbox", "schedule.md");
-const scheduleFile = existsSync(vaultSchedule) ? vaultSchedule : join(ROOT, "ψ/inbox/schedule.md");
+const psiPath = join(ROOT, "ψ");
+const psi = existsSync(psiPath) ? realpathSync(psiPath) : psiPath;
+const scheduleFile = join(psi, "inbox", "schedule.md");
 if (existsSync(scheduleFile)) {
   const lines = (await Bun.file(scheduleFile).text()).split("\n");
   const rows = lines.filter((l) => l.startsWith("| ") && !l.includes("---") && !l.includes("Date")).slice(0, 5);

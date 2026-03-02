@@ -12,6 +12,7 @@ Scan, track, and welcome the Oracle family.
 ```
 /oracle-family-scan              # Scan GitHub issues for new Oracles
 /oracle-family-scan --welcome    # Scan + post welcome messages
+/oracle-family-scan --mine       # My Oracle fleet status (local repos)
 /oracle-family-scan list         # Show all known Oracles
 /oracle-family-scan repos        # Find Oracle repos on GitHub
 /oracle-family-scan report       # Generate comprehensive family report
@@ -69,6 +70,32 @@ For each introduction, check if `nazt` responded after.
 NEEDS WELCOME: None
 TOTAL: 15 Oracles
 ```
+
+---
+
+## Mode 1b: --mine (Fleet Status)
+
+**Goal**: Show status of all local Oracle repos owned by the current user.
+
+### Step 1: Run Fleet Scan Script
+
+```bash
+bun __SKILL_DIR__/scripts/fleet-scan.ts
+```
+
+### Step 2: Present Results
+
+Show the table output from the script. Highlight:
+- Repos with outdated skills versions
+- Repos with no recent sessions (stale)
+- Repos missing ψ/ (partial Oracle setup)
+
+### Step 3: Suggestions
+
+Based on the scan, suggest:
+- Which repos need `oracle-soul-sync-update`
+- Which repos haven't been visited recently
+- Any repos with uncommitted changes
 
 ---
 

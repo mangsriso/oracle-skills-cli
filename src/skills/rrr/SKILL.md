@@ -71,7 +71,7 @@ oracle_learn({ pattern: [lesson content], concepts: [tags], source: "rrr: REPO" 
 
 ### 5. Save
 
-Retro files are written to vault (`~/.oracle/ψ/memory/retrospectives/`).
+Retro files are written to vault (wherever `ψ` symlink resolves).
 
 **Do NOT `git add ψ/`** — it's a symlink to the vault. Vault files are shared state, not committed to repos.
 
