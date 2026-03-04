@@ -1,23 +1,51 @@
 #!/usr/bin/env bun
-// fleet-scan.ts - My Oracle fleet: open issues + last sessions
+// fleet-scan.ts - My Oracle fleet status via gh CLI
 // Usage: bun fleet-scan.ts
+//
+// Part 1: Oracle births from oracle-v2 issues (single API call)
+// Part 2: Open issues across orgs
+// Part 3: Recently pushed Oracle repos
 
 import { $ } from "bun";
-import { existsSync, statSync } from "fs";
-import { join } from "path";
 
-const ghqRoot = (await $`ghq root`.text()).trim();
+const ORACLE_REPO = "Soul-Brews-Studio/oracle-v2";
+const ORGS = ["Soul-Brews-Studio", "laris-co", "nazt"];
+const BIRTH_PATTERN = /awaken|born|birth|enter.*chat|hello|สวัสดี|arrived/i;
 
-// --- Part 1: Open Issues ---
-const orgs = ["Soul-Brews-Studio", "laris-co", "nazt"];
+// --- Part 1: Oracle Births from oracle-v2 ---
+type Birth = { number: number; title: string; date: string; author: string };
 
+const birthIssuesRaw = await $`gh issue list --repo ${ORACLE_REPO} --state all --limit 300 --json number,title,createdAt,author --jq '.[] | "\(.number)|\(.title)|\(.createdAt | split("T")[0])|\(.author.login)"'`.text();
+
+const allBirths: Birth[] = birthIssuesRaw.trim().split("\n").filter(Boolean)
+  .map(line => {
+    const [num, title, date, author] = line.split("|");
+    return { number: parseInt(num), title, date, author };
+  })
+  .filter(b => BIRTH_PATTERN.test(b.title));
+
+const uniqueAuthors = new Set(allBirths.map(b => b.author));
+
+// By month
+const byMonth = new Map<string, number>();
+for (const b of allBirths) {
+  const month = b.date.slice(0, 7);
+  byMonth.set(month, (byMonth.get(month) || 0) + 1);
+}
+
+// Recent births (last 4 days)
+const now = new Date();
+const recentCutoff = new Date(now.getTime() - 4 * 86400000).toISOString().slice(0, 10);
+const thisWeek = allBirths.filter(b => b.date >= recentCutoff);
+
+// --- Part 2: Open Issues across orgs ---
 type Issue = { repo: string; number: number; title: string; updated: string; labels: string };
 const allIssues: Issue[] = [];
 
 await Promise.all(
-  orgs.map(async (org) => {
+  ORGS.map(async (org) => {
     try {
-      const repos = (await $`gh repo list ${org} --json name --limit 30 --jq '.[].name'`.text())
+      const repos = (await $`gh repo list ${org} --json name --limit 50 --jq '.[].name'`.text())
         .trim().split("\n").filter(Boolean);
       await Promise.all(
         repos.map(async (repo) => {
@@ -41,48 +69,67 @@ await Promise.all(
 
 allIssues.sort((a, b) => b.updated.localeCompare(a.updated));
 
-// --- Part 2: Recent Sessions (local) ---
-type SessionInfo = { slug: string; lastSession: string; daysAgo: number };
-const sessions: SessionInfo[] = [];
+// --- Part 3: Recently pushed repos (Oracle pattern) ---
+type RepoActivity = { name: string; pushed: string; daysAgo: number };
+const recentRepos: RepoActivity[] = [];
 
-// Only scan github.com repos, skip ψ/ nested and worktrees
-const repos = (await $`ghq list`.text()).trim().split("\n")
-  .filter(r => r.startsWith("github.com/") && !r.includes("/ψ/") && !r.includes(".wt"));
+await Promise.all(
+  ORGS.map(async (org) => {
+    try {
+      const repos = await $`gh repo list ${org} --limit 100 --json nameWithOwner,pushedAt`.quiet().json() as Array<{ nameWithOwner: string; pushedAt: string }>;
+      for (const r of repos) {
+        const pushed = new Date(r.pushedAt);
+        const daysAgo = Math.floor((now.getTime() - pushed.getTime()) / 86400000);
+        if (daysAgo <= 14) {
+          recentRepos.push({ name: r.nameWithOwner, pushed: r.pushedAt.split("T")[0], daysAgo });
+        }
+      }
+    } catch {}
+  })
+);
 
-const now = Date.now();
-
-for (const repo of repos) {
-  const path = join(ghqRoot, repo);
-  if (!existsSync(join(path, "ψ")) && !existsSync(join(path, "CLAUDE.md"))) continue;
-
-  // Check for .claude/projects/ session files
-  const projectsDir = join(path, ".claude", "projects");
-  if (!existsSync(projectsDir)) continue;
-
-  try {
-    const newest = (await $`ls -t ${projectsDir}/*/transcript.jsonl 2>/dev/null`.text()).trim().split("\n")[0];
-    if (!newest) continue;
-    const mtime = statSync(newest).mtimeMs;
-    const daysAgo = Math.floor((now - mtime) / 86400000);
-    if (daysAgo > 30) continue; // Only show repos active in last 30 days
-    const date = new Date(mtime).toISOString().slice(0, 10);
-    sessions.push({ slug: repo.replace("github.com/", ""), lastSession: date, daysAgo });
-  } catch {}
-}
-
-sessions.sort((a, b) => a.daysAgo - b.daysAgo);
+recentRepos.sort((a, b) => a.daysAgo - b.daysAgo);
 
 // --- Output ---
 console.log("# My Oracle Fleet\n");
 
-// Recent sessions
-if (sessions.length) {
-  console.log(`## Recent Sessions (${sessions.length} repos, last 30 days)\n`);
-  console.log("| Repo | Last Session | Days Ago |");
-  console.log("|------|-------------|----------|");
-  for (const s of sessions) {
-    const age = s.daysAgo === 0 ? "today" : s.daysAgo === 1 ? "yesterday" : `${s.daysAgo}d`;
-    console.log(`| ${s.slug} | ${s.lastSession} | ${age} |`);
+// Births summary
+console.log(`## Oracle Family — ${allBirths.length} births, ${uniqueAuthors.size} unique humans\n`);
+console.log("### Growth by Month\n");
+console.log("| Month | Births |");
+console.log("|-------|--------|");
+for (const [month, count] of [...byMonth.entries()].sort()) {
+  const bar = "█".repeat(Math.ceil(count / 2));
+  console.log(`| ${month} | ${bar} ${count} |`);
+}
+
+if (thisWeek.length) {
+  console.log(`\n### Recent Births (${thisWeek.length} in last 4 days)\n`);
+  console.log("| # | Oracle | Author | Date |");
+  console.log("|---|--------|--------|------|");
+  for (const b of thisWeek) {
+    // Extract oracle name: strip emoji, "Oracle", "Awakens", etc.
+    let name = b.title
+      .replace(/[\u{1F300}-\u{1FAD6}\u{2600}-\u{27BF}]/gu, "") // emoji
+      .replace(/\[Birth\]\s*/i, "")
+      .replace(/\bOracle\b/gi, "")
+      .replace(/\b(Awakens?|Re-Awakens?|born|Birth|arrived|enter.*chat|has entered)\b/gi, "")
+      .replace(/[—–\-:].*/g, "") // strip subtitle after dash
+      .trim()
+      .slice(0, 25);
+    if (!name) name = b.title.slice(0, 25);
+    console.log(`| #${b.number} | ${name} | @${b.author} | ${b.date} |`);
+  }
+}
+
+// Recently active repos
+if (recentRepos.length) {
+  console.log(`\n## Active Repos (pushed in last 14 days: ${recentRepos.length})\n`);
+  console.log("| Repo | Last Push | Days Ago |");
+  console.log("|------|-----------|----------|");
+  for (const r of recentRepos) {
+    const age = r.daysAgo === 0 ? "today" : r.daysAgo === 1 ? "yesterday" : `${r.daysAgo}d`;
+    console.log(`| ${r.name} | ${r.pushed} | ${age} |`);
   }
 }
 
@@ -104,6 +151,6 @@ if (allIssues.length) {
   }
 }
 
-if (!sessions.length && !allIssues.length) {
-  console.log("No recent sessions or open issues found.");
+if (!allBirths.length && !allIssues.length && !recentRepos.length) {
+  console.log("No data found.");
 }
