@@ -102,7 +102,7 @@ Oracle skills extend your agent's capabilities with specialized workflows:
 | - |  |  |  |
 | 5 | **deep-research** | skill + code | Deep Research via Gemini |
 | 6 | **gemini** | skill + code | Control Gemini via MQTT WebSocket |
-| 7 | **oracle-family-scan** | skill + code | Manage Oracle family |
+| 7 | **oracle-family-scan** | skill + code | Oracle Family Registry |
 | 8 | **oraclenet** | skill + code | OracleNet — claim identity, post, comment |
 | 9 | **physical** | skill + code | Physical location awareness from FindMy |
 | 10 | **project** | skill + code | Clone and track external repos |
@@ -128,7 +128,7 @@ Oracle skills extend your agent's capabilities with specialized workflows:
 | 29 | **who-are-you** | skill | Know ourselves |
 | 30 | **worktree** | skill | Git worktree for parallel work |
 
-*Generated: 2026-03-04 07:41:13 UTC*
+*Generated: 2026-03-04 13:25:01 UTC*
 
 ## Supported Agents
 
