@@ -44,7 +44,8 @@ date "+🕐 %H:%M %Z (%A %d %B %Y)"
 ## Location
 
 **Project**: [current project name]
-**Path**: [working directory]
+**Path**: [physical path from pwd -P]
+**Logical**: [logical path from pwd, only show if different from physical]
 
 ## Session
 
@@ -78,9 +79,10 @@ if [[ -f "CLAUDE.md" ]]; then
   grep -E "^(I am|Identity|Oracle):" CLAUDE.md | head -1
 fi
 
-# Get project info
-basename "$(pwd)"
-pwd
+# Get project info (both logical and physical paths for transparency)
+basename "$(pwd -P)"
+echo "LOGICAL=$(pwd)"
+echo "PHYSICAL=$(pwd -P)"
 ```
 
 ### Detect CLI Tool
@@ -191,7 +193,8 @@ If Oracle identity found, include:
 
 ## Location
 **Project**: sea-oracle
-**Path**: /Users/nat/.../sea-oracle
+**Path**: /home/nat/.../sea-oracle
+**Logical**: /Users/nat/.../sea-oracle (via symlink)
 
 ## Oracle Identity
 **Born**: January 21, 2026
