@@ -3,66 +3,31 @@
 [![CI](https://github.com/Soul-Brews-Studio/oracle-skills-cli/actions/workflows/ci.yml/badge.svg)](https://github.com/Soul-Brews-Studio/oracle-skills-cli/actions/workflows/ci.yml)
 [![Version](https://img.shields.io/github/v/tag/Soul-Brews-Studio/oracle-skills-cli?label=version)](https://github.com/Soul-Brews-Studio/oracle-skills-cli/releases)
 
-Install Oracle skills to Claude Code, OpenCode, Codex, Gemini, Cursor, and 13+ AI coding agents.
+Skills for AI coding agents. 31 skills, 18 agents, 4 profiles.
 
-## Quick Start
+## Install
 
 ```bash
-# macOS / Linux — pre-built binary (no runtime needed)
 curl -fsSL https://raw.githubusercontent.com/Soul-Brews-Studio/oracle-skills-cli/main/install.sh | bash
 ```
 
-```bash
-# Windows / fallback (requires Bun)
-bunx --bun oracle-skills@github:Soul-Brews-Studio/oracle-skills-cli install -g -y
-```
-
-After install, restart your AI agent. Try `/about-oracle` to learn what you just installed.
-
-## Commands
-
-| Command | What it does |
-|---------|--------------|
-| `oracle-skills about` | Version, prerequisites check, system status |
-| `oracle-skills init` | First-time setup — installs standard profile globally |
-| `oracle-skills init -p minimal` | Init with minimal profile instead |
-| `oracle-skills install -g -y` | Install all skills globally |
-| `oracle-skills install -g -y --profile standard` | Install specific profile |
-| `oracle-skills install -g -y --commands` | Also install command stubs |
-| `oracle-skills uninstall -g -y` | Remove all installed skills |
-| `oracle-skills list -g` | Show installed skills |
-| `oracle-skills profiles` | List available profiles |
-| `oracle-skills profiles standard` | Show skills in a profile |
-| `oracle-skills agents` | List supported agents |
+Restart your agent. Try `/about-oracle`.
 
 ## Profiles
 
-Profiles control how many skills get installed. Start small, expand with `/go`.
-
 ```bash
-oracle-skills init -y                    # standard (default)
-oracle-skills init -p minimal -y         # minimal
-oracle-skills install -g -y              # full (all 31 skills)
+oracle-skills init                  # standard (11 skills, default)
+oracle-skills init -p minimal       # minimal (6 skills)
+oracle-skills install -g -y         # full (all 31 skills)
 ```
 
-| Profile | Count | Skills |
-|---------|-------|--------|
-| **seed** / **minimal** | 6 | `forward`, `retrospective`, `recap`, `standup`, `go`, `about-oracle` |
-| **standard** | 11 | minimal + `trace`, `dig`, `learn`, `talk-to`, `oracle-family-scan` |
-| **full** | 31 | All skills |
+| Profile | Skills |
+|---------|--------|
+| **minimal** | `forward`, `retrospective`, `recap`, `standup`, `go`, `about-oracle` |
+| **standard** | minimal + `trace`, `dig`, `learn`, `talk-to`, `oracle-family-scan` |
+| **full** | all 31 |
 
-### Features (add-ons via `/go`)
-
-After installing, use `/go` to add feature modules on top of your profile:
-
-```
-/go + soul              → +awaken, philosophy, who-are-you, birth, feel
-/go + network           → +talk-to, oracle-family-scan, oraclenet, oracle, oracle-soul-sync-update
-/go + workspace         → +worktree, physical, schedule
-/go + creator           → +speak, deep-research, watch, gemini
-/go full                → enable everything
-/go reset               → same as /go full
-```
+Switch anytime: `/go minimal`, `/go standard`, `/go full`, `/go + soul`
 
 ## Skills
 
@@ -104,46 +69,26 @@ Oracle skills extend your agent's capabilities with specialized workflows:
 | 30 | **who-are-you** | skill | Know ourselves |
 | 31 | **worktree** | skill | Git worktree for parallel work |
 
-*Generated: 2026-03-13 06:01:18 UTC*
+*Generated: 2026-03-13 06:03:25 UTC*
 
 ## Supported Agents
 
-| Agent | Project Path | Global Path |
-|-------|--------------|-------------|
-| Claude Code | `.claude/skills/` | `~/.claude/skills/` |
-| OpenCode | `.opencode/skills/` | `~/.config/opencode/skills/` |
-| Codex | `.codex/skills/` | `~/.codex/skills/` |
-| Cursor | `.cursor/skills/` | `~/.cursor/skills/` |
-| Amp | `.agents/skills/` | `~/.config/agents/skills/` |
-| Kilo Code | `.kilocode/skills/` | `~/.kilocode/skills/` |
-| Roo Code | `.roo/skills/` | `~/.roo/skills/` |
-| Goose | `.goose/skills/` | `~/.config/goose/skills/` |
-| Gemini CLI | `.gemini/skills/` | `~/.gemini/skills/` |
-| Antigravity | `.agent/skills/` | `~/.gemini/antigravity/skills/` |
-| GitHub Copilot | `.github/skills/` | `~/.copilot/skills/` |
-| OpenClaw | `skills/` | `~/.openclaw/skills/` |
-| Droid | `.factory/skills/` | `~/.factory/skills/` |
-| Windsurf | `.windsurf/skills/` | `~/.codeium/windsurf/skills/` |
-| Cline | `.cline/skills/` | `~/.cline/skills/` |
-| Aider | `.aider/skills/` | `~/.aider/skills/` |
-| Continue | `.continue/skills/` | `~/.continue/skills/` |
-| Zed | `.zed/skills/` | `~/.zed/skills/` |
+Claude Code, OpenCode, Codex, Cursor, Amp, Kilo Code, Roo Code, Goose, Gemini CLI, Antigravity, GitHub Copilot, OpenClaw, Droid, Windsurf, Cline, Aider, Continue, Zed
+
+Run `oracle-skills agents` to see detected agents and paths.
+
+## CLI
+
+```
+oracle-skills about              # prereqs check + system status
+oracle-skills init               # first-time setup (standard profile)
+oracle-skills install -g -y      # install all skills globally
+oracle-skills uninstall -g -y    # remove all skills
+oracle-skills list -g            # show installed skills
+oracle-skills profiles           # list profiles
+oracle-skills agents             # list agents
+```
 
 ## Origin
 
-Digitized from **Nat Weerawan**'s brain ([@nazt](https://github.com/nazt)) — [Soul Brews Studio](https://github.com/Soul-Brews-Studio).
-
-These skills are patterns from thousands of hours working alongside AI agents — how to start a session, how to end one well, how to carry context forward, how to reflect. Every skill here was a real workflow before it became code.
-
-> *Nat Weerawan x Oracle · Symbiotic Intelligence*
-> *Digitized from Nat's brain — how one human works with AI, captured as code*
-
-## Related
-
-- [oracle-v2](https://github.com/Soul-Brews-Studio/oracle-v2) - MCP Memory Layer (Oracle brain)
-- [Agent Skills Specification](https://agentskills.io) - Cross-agent skill format
-- [add-skill](https://github.com/vercel-labs/add-skill) - Universal skill installer by Vercel
-
-## License
-
-MIT
+By [Nat Weerawan](https://github.com/nazt) — [Soul Brews Studio](https://github.com/Soul-Brews-Studio). MIT.
