@@ -18,16 +18,32 @@ Restart your agent. Try `/about-oracle`.
 ```bash
 oracle-skills init                  # standard (11 skills, default)
 oracle-skills init -p minimal       # minimal (7 skills)
-oracle-skills install -g -y         # full (all 31 skills)
+oracle-skills install -g -y         # full (all skills)
+oracle-skills select -g             # interactive — pick exactly what you want
+oracle-skills uninstall -g -y       # remove all
+oracle-skills uninstall -g -s dig   # remove specific skill
 ```
 
-| Profile | Skills |
-|---------|--------|
-| **minimal** | `forward`, `retrospective`, `recap`, `standup`, `go`, `about-oracle`, `oracle-family-scan` |
-| **standard** | minimal + `trace`, `dig`, `learn`, `talk-to`, `oracle-family-scan` |
-| **full** | all 31 |
+<!-- profiles:start -->
+
+| Profile | Count | Skills |
+|---------|-------|--------|
+| **minimal** | 7 | `forward`, `retrospective`, `recap`, `standup`, `go`, `about-oracle`, `oracle-family-scan` |
+| **standard** | 11 | `forward`, `retrospective`, `recap`, `standup`, `trace`, `dig`, `learn`, `talk-to`, `oracle-family-scan`, `go`, `about-oracle` |
+| **full** | 31 | all |
 
 Switch anytime: `/go minimal`, `/go standard`, `/go full`, `/go + soul`
+
+**Features** (stack on any profile with `/go + feature`):
+
+| Feature | Skills |
+|---------|--------|
+| **+soul** | `awaken`, `philosophy`, `who-are-you`, `about-oracle`, `birth`, `feel` |
+| **+network** | `talk-to`, `oracle-family-scan`, `oracle-soul-sync-update`, `oracle`, `oraclenet` |
+| **+workspace** | `worktree`, `physical`, `schedule` |
+| **+creator** | `speak`, `deep-research`, `watch`, `gemini` |
+
+<!-- profiles:end -->
 
 ## Skills
 
@@ -69,7 +85,7 @@ Oracle skills extend your agent's capabilities with specialized workflows:
 | 30 | **who-are-you** | skill | Know ourselves |
 | 31 | **worktree** | skill | Git worktree for parallel work |
 
-*Generated: 2026-03-13 06:08:38 UTC*
+*Generated: 2026-03-13 06:17:42 UTC*
 
 ## Supported Agents
 
@@ -83,9 +99,12 @@ Run `oracle-skills agents` to see detected agents and paths.
 oracle-skills about              # prereqs check + system status
 oracle-skills init               # first-time setup (standard profile)
 oracle-skills install -g -y      # install all skills globally
+oracle-skills select -g          # interactive skill picker
 oracle-skills uninstall -g -y    # remove all skills
+oracle-skills uninstall -g -s X  # remove specific skill(s)
 oracle-skills list -g            # show installed skills
 oracle-skills profiles           # list profiles
+oracle-skills profiles minimal   # show skills in a profile
 oracle-skills agents             # list agents
 ```
 
