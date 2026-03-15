@@ -1,25 +1,48 @@
 /**
- * Skill profiles — named sets of skills for bulk install/uninstall.
+ * Skill profiles + features — data-driven from 1,013 sessions (Mar 2026).
+ *
+ * Profiles = base tiers (how much you need)
+ * Features = add-on modules (what domain)
  *
  * - `include` = only install these skills
  * - `exclude` = install all EXCEPT these
  * - Both empty = install everything (same as current default)
  */
+
+// --- Profiles (tiers) ---
+
 export const profiles: Record<string, { include?: string[]; exclude?: string[] }> = {
+  // minimal: the daily ritual — standup → recap → work → rrr → forward
+  // go is always included so users can switch profiles
   seed: {
-    include: ['trace', 'dig', 'recap', 'learn', 'rrr', 'who-are-you'],
+    include: ['forward', 'rrr', 'recap', 'standup', 'go', 'about-oracle', 'oracle-family-scan', 'oracle-soul-sync-update'],
   },
   minimal: {
-    include: ['trace', 'dig', 'recap', 'learn', 'rrr', 'who-are-you'],
+    include: ['forward', 'rrr', 'recap', 'standup', 'go', 'about-oracle', 'oracle-family-scan', 'oracle-soul-sync-update'],
   },
+  // standard: daily driver + discovery (covers 96% of actual usage)
   standard: {
     include: [
-      'trace', 'dig', 'recap', 'learn', 'rrr', 'who-are-you',
-      'worktree', 'oracle', 'standup', 'forward', 'fyi', 'merged',
-      'talk-to', 'prepare', 'research',
+      'forward', 'rrr', 'recap', 'standup',
+      'trace', 'dig', 'learn', 'talk-to', 'oracle-family-scan', 'prepare', 'research',
+      'go', 'about-oracle', 'oracle-soul-sync-update',
     ],
   },
-  full: {}, // all skills (default behavior)
+  // full: everything
+  full: {},
+};
+
+// --- Features (add-on modules) ---
+
+export const features: Record<string, string[]> = {
+  // soul: birth/awaken new oracles (awaken↔learn 95%, awaken↔philosophy 74%)
+  soul: ['awaken', 'philosophy', 'who-are-you', 'about-oracle', 'birth', 'feel'],
+  // network: multi-oracle communication (talk-to↔trace 87%, family-scan↔forward 62%)
+  network: ['talk-to', 'oracle-family-scan', 'oracle-soul-sync-update', 'oracle', 'oraclenet'],
+  // workspace: parallel work + ops (path↔worktree 100%)
+  workspace: ['worktree', 'physical', 'schedule'],
+  // creator: content + research + speech
+  creator: ['speak', 'deep-research', 'watch', 'gemini'],
 };
 
 /**
@@ -43,4 +66,28 @@ export function resolveProfile(
 
   // Both empty — install everything
   return null;
+}
+
+/**
+ * Resolve a profile + features into a combined skill list.
+ * profile = base tier, featureNames = add-on modules
+ */
+export function resolveProfileWithFeatures(
+  profileName: string,
+  featureNames: string[],
+  allSkillNames: string[]
+): string[] {
+  // Start with profile
+  const base = resolveProfile(profileName, allSkillNames) || [...allSkillNames];
+
+  // Add features
+  const result = new Set(base);
+  for (const feat of featureNames) {
+    const skills = features[feat];
+    if (skills) {
+      for (const s of skills) result.add(s);
+    }
+  }
+
+  return [...result];
 }

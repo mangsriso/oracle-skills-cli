@@ -1,6 +1,7 @@
 ---
 name: rrr
 description: Create session retrospective with AI diary and lessons learned. Use when user says "rrr", "retrospective", "wrap up session", "session summary", or at end of work session.
+argument-hint: "[--detail | --dig | --deep]"
 ---
 
 # /rrr
@@ -118,9 +119,21 @@ Then steps 3-5 same as default.
 
 **Retrospective powered by session goldminer. No subagents.**
 
-### 1. Run `/trace --dig`
+### 1. Run dig to get session timeline
 
-Follow the `/trace --dig` instructions (from the trace skill) to scan Claude Code session `.jsonl` files and get the session timeline JSON.
+Discover project dirs using basename matching (handles dots in paths like `github.com`), including worktree dirs:
+
+```bash
+PROJECT_BASE=$(ls -d "$HOME/.claude/projects/"*"$(basename "$(pwd)")" 2>/dev/null | head -1)
+export PROJECT_DIRS="$PROJECT_BASE"
+for wt in "${PROJECT_BASE}"-wt*; do [ -d "$wt" ] && export PROJECT_DIRS="$PROJECT_DIRS:$wt"; done
+```
+
+Then run dig.py to get session JSON:
+
+```bash
+python3 ~/.claude/skills/dig/scripts/dig.py 0
+```
 
 Also gather git context:
 

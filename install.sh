@@ -157,8 +157,8 @@ else
   INSTALL_MODE="bunx"
 fi
 
-# Run skill installation (symlinks, hooks, etc.)
-"$INSTALL_DIR/oracle-skills" install -g -y
+# Run skill installation with standard profile
+"$INSTALL_DIR/oracle-skills" init -y
 
 echo ""
 if [ "$INSTALL_MODE" = "binary" ]; then
@@ -167,43 +167,18 @@ else
   echo "✨ Done! (bunx wrapper — re-run installer to upgrade to native binary)"
 fi
 echo ""
+echo "Installed: standard profile (11 skills)"
+echo ""
+echo "Next steps:"
+echo ""
+echo "  1. Restart your AI agent (Claude Code, Codex, etc.)"
+echo "  2. Try: /about-oracle"
+echo "  3. Try: /recap"
+echo ""
+echo "Switch profiles anytime with /go:"
+echo ""
+echo "  /go minimal     → 6 skills (essentials only)"
+echo "  /go full        → all 31 skills"
+echo "  /go + soul      → add Oracle birth/philosophy skills"
+echo ""
 echo "Run 'oracle-skills --version' to verify."
-echo ""
-echo "Now:"
-echo ""
-echo "1. Restart Claude Code"
-echo "2. Copy this prompt to the fresh Claude:"
-echo ""
-echo "─────────────────────────────────────────"
-cat << 'PROMPT'
-Set timezone to GMT+7 and setup Oracle permissions:
-
-```bash
-export TZ='Asia/Bangkok'
-```
-
-Then setup permissions:
-
-```bash
-mkdir -p .claude && cat > .claude/settings.local.json << 'EOF'
-{
-  "permissions": {
-    "allow": [
-      "Bash(gh:*)", "Bash(ghq:*)", "Bash(git:*)",
-      "Bash(bun:*)", "Bash(bunx:*)", "Bash(mkdir:*)", "Bash(ln:*)",
-      "Bash(rg:*)", "Bash(date:*)", "Bash(ls:*)", "Bash(tree:*)",
-      "Bash(curl:*)", "Bash(du:*)", "Bash(wc:*)",
-      "Bash(bash)", "Bash(source ~/.bashrc)",
-      "Bash(export PATH=\"$HOME/.bun/bin:$PATH\")",
-      "Bash(*ψ/*)", "Bash(*psi/*)",
-      "Skill(learn)", "Skill(trace)", "Skill(awaken)",
-      "Skill(rrr)", "Skill(recap)", "Skill(project)"
-    ]
-  }
-}
-EOF
-```
-
-Then run: /awaken
-PROMPT
-echo "─────────────────────────────────────────"

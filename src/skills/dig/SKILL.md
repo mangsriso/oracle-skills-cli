@@ -1,6 +1,7 @@
 ---
 name: dig
 description: Mine Claude Code sessions — timeline, gaps, repo attribution. Use when user says "dig", "sessions", "past sessions", "timeline", "what did I work on".
+argument-hint: "[N] | --all | --timeline"
 ---
 
 # /dig - Session Goldminer
@@ -12,10 +13,10 @@ Mine Claude Code session data for timelines, gaps, and repo attribution. No quer
 ```
 /dig                    # Current repo, 10 most recent
 /dig [N]                # Current repo, N most recent
-/dig --all              # All repos, 10 most recent
+/dig --all              # All repos, ALL sessions (auto-detect count)
 /dig --all [N]          # All repos, N most recent
 /dig --timeline         # Day-by-day grouped (current repo)
-/dig --all --timeline   # Day-by-day grouped (all repos)
+/dig --all --timeline   # Day-by-day grouped (all repos, ALL sessions)
 ```
 
 ## Step 0: Timestamp
@@ -44,10 +45,11 @@ export PROJECT_DIRS=$(ls -d "$HOME/.claude/projects/"*/ | tr '\n' ':')
 
 ## Step 2: Extract Session Data
 
-Run the dig script (pass N if user specified a count, default 10):
+Run the dig script. Pass `0` for `--all` (no limit), or N if user specified a count, default 10:
 
 ```bash
 python3 ~/.claude/skills/dig/scripts/dig.py [N]
+# N=10 (default), N=0 (scan all sessions), N=50 (50 most recent)
 ```
 
 ## Step 3: Display Timeline
@@ -85,7 +87,7 @@ Column rendering rules:
 
 When `--timeline` flag is present, group sessions by date instead of a flat table. Use `--all` to see all repos (recommended for timeline).
 
-**Step 1**: Run dig.py with large N (e.g. 200 for `--all`, or user-specified count)
+**Step 1**: Run dig.py with `0` for `--all` (scans all sessions), or user-specified count
 
 **Step 2**: Group sessions by date from `startGMT7`. Render each day as:
 

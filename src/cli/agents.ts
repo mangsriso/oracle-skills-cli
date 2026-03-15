@@ -30,8 +30,8 @@ export const agents: Record<AgentType, AgentConfig> = {
   codex: {
     name: 'codex',
     displayName: 'Codex',
-    skillsDir: '.agents/skills',
-    globalSkillsDir: join(home, '.agents/skills'),
+    skillsDir: '.codex/skills',
+    globalSkillsDir: join(home, '.codex/skills'),
     commandsDir: '.codex/prompts',
     globalCommandsDir: join(home, '.codex/prompts'),
     useFlatFiles: true,
