@@ -33,7 +33,7 @@ describe('agents', () => {
 describe('CLI', () => {
   it('should show version', async () => {
     const result = await $`bun run src/cli/index.ts --version`.text();
-    expect(result.trim()).toMatch(/^\d+\.\d+\.\d+$/);
+    expect(result.trim()).toMatch(/^\d+\.\d+\.\d+(-[\w.]+)?$/);
   });
 
   it('should show help', async () => {

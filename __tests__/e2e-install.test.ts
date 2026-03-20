@@ -88,7 +88,7 @@ describe("e2e: install with standard profile", () => {
 
     for (const name of skills) {
       const content = await readFile(join(SKILLS_DIR, name, "SKILL.md"), "utf-8");
-      expect(content).toMatch(/v\d+\.\d+\.\d+ G-SKLL \|/);
+      expect(content).toMatch(/v\d+\.\d+\.\d+(-[\w.]+)? G-SKLL \|/);
     }
   });
 
@@ -106,7 +106,7 @@ describe("e2e: install with standard profile", () => {
     expect(existsSync(manifestPath)).toBe(true);
 
     const manifest = JSON.parse(await readFile(manifestPath, "utf-8"));
-    expect(manifest.version).toMatch(/^\d+\.\d+\.\d+$/);
+    expect(manifest.version).toMatch(/^\d+\.\d+\.\d+(-[\w.]+)?$/);
     expect(manifest.agent).toBe(TEST_AGENT);
     expect(manifest.skills).toBeArray();
     expect(manifest.skills.length).toBe(profiles.standard.include!.length);

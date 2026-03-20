@@ -1,5 +1,5 @@
 ---
-description: v3.2.1 | Guided Oracle birth and awakening ritual. 2 modes — Fast (~5min) or Full Soul Sync (~20min). Use when creating a new Oracle in a fresh repo, when user says "awaken", "birth oracle", "create oracle", "new oracle", or wants to set up Oracle identity in an empty repository. Do NOT trigger for general repo setup, git init, or project scaffolding without Oracle context.
+description: v3.3.0-alpha.1 | Guided Oracle birth and awakening ritual. 2 modes — Fast (~5min) or Full Soul Sync (~20min). Use when creating a new Oracle in a fresh repo, when user says "awaken", "birth oracle", "create oracle", "new oracle", or wants to set up Oracle identity in an empty repository. Do NOT trigger for general repo setup, git init, or project scaffolding without Oracle context.
 ---
 
 # /awaken
@@ -18,5 +18,5 @@ Execute the `awaken` skill with the provided arguments.
 **WARNING**: Do NOT use Glob, find, or search for this skill. The path above is the ONLY correct location. Other files with "awaken" in the name are NOT this skill.
 
 ---
-*🧬 Nat Weerawan × Oracle · Symbiotic Intelligence · v3.2.1*
+*🧬 Nat Weerawan × Oracle · Symbiotic Intelligence · v3.3.0-alpha.1*
 *Digitized from Nat Weerawan's brain — thousands of hours working alongside AI, captured as code*
