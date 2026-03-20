@@ -129,7 +129,7 @@ When `--timeline` flag is present, group sessions by date instead of a flat tabl
 
 ## No trace log
 
-`/dig` does NOT write a trace log file or call oracle_trace. It's a read-only scan. Output goes to screen only.
+`/dig` does NOT write a trace log file or call arra_trace. It's a read-only scan. Output goes to screen only.
 
 ---
 
