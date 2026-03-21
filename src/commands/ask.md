@@ -1,5 +1,5 @@
 ---
-description: v2.0.10 | "Two-layer knowledge retrieval: Oracle + NLM. Use when user says 'ask', 'ask about', 'what do we know about', 'query knowledge'. Do NOT use for web research — use /research. Do NOT use for notebook management — use /notebooklm. Do NOT use for deep Gemini research — use /deep-research."
+description: v3.0.4 | "Two-layer knowledge retrieval: Oracle + NLM. Use when user says 'ask', 'ask about', 'what do we know about', 'query knowledge'. Do NOT use for web research — use /research. Do NOT use for notebook management — use /notebooklm. Do NOT use for deep Gemini research — use /deep-research."
 ---
 
 # /ask
@@ -18,5 +18,5 @@ Execute the `ask` skill with the provided arguments.
 **WARNING**: Do NOT use Glob, find, or search for this skill. The path above is the ONLY correct location. Other files with "ask" in the name are NOT this skill.
 
 ---
-*🧬 Nat Weerawan × Oracle · Symbiotic Intelligence · v2.0.10*
+*🧬 Nat Weerawan × Oracle · Symbiotic Intelligence · v3.0.4*
 *Digitized from Nat Weerawan's brain — thousands of hours working alongside AI, captured as code*

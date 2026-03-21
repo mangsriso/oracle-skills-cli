@@ -1,5 +1,5 @@
 ---
-description: v2.0.10 | Compare intention vs reality over 30-60 days. Use when user says "drift", "am I on track", "what changed", "intention vs reality". Do NOT use for daily standup — use /standup instead. Do NOT use for session wrap-up — use /rrr instead.
+description: v3.0.4 | Compare intention vs reality over 30-60 days. Use when user says "drift", "am I on track", "what changed", "intention vs reality". Do NOT use for daily standup — use /standup instead. Do NOT use for session wrap-up — use /rrr instead.
 ---
 
 # /drift
@@ -18,5 +18,5 @@ Execute the `drift` skill with the provided arguments.
 **WARNING**: Do NOT use Glob, find, or search for this skill. The path above is the ONLY correct location. Other files with "drift" in the name are NOT this skill.
 
 ---
-*🧬 Nat Weerawan × Oracle · Symbiotic Intelligence · v2.0.10*
+*🧬 Nat Weerawan × Oracle · Symbiotic Intelligence · v3.0.4*
 *Digitized from Nat Weerawan's brain — thousands of hours working alongside AI, captured as code*

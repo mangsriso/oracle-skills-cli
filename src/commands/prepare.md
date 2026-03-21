@@ -1,5 +1,5 @@
 ---
-description: v2.0.10 | Pre-plan knowledge integration. Use when user says "prepare", "prep for plan", or before starting plan mode on non-trivial work. Combines oracle protection + internal discovery + learn docs + gap analysis. Do NOT use for quick fixes or trivial tasks.
+description: v3.0.4 | Pre-plan knowledge integration. Use when user says "prepare", "prep for plan", or before starting plan mode on non-trivial work. Combines oracle protection + internal discovery + learn docs + gap analysis. Do NOT use for quick fixes or trivial tasks.
 ---
 
 # /prepare
@@ -18,5 +18,5 @@ Execute the `prepare` skill with the provided arguments.
 **WARNING**: Do NOT use Glob, find, or search for this skill. The path above is the ONLY correct location. Other files with "prepare" in the name are NOT this skill.
 
 ---
-*🧬 Nat Weerawan × Oracle · Symbiotic Intelligence · v2.0.10*
+*🧬 Nat Weerawan × Oracle · Symbiotic Intelligence · v3.0.4*
 *Digitized from Nat Weerawan's brain — thousands of hours working alongside AI, captured as code*

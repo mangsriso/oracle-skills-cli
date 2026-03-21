@@ -1,5 +1,5 @@
 ---
-description: v2.0.10 | Create new skills with Oracle philosophy. Use when user says "create skill", "new skill", "make a skill for X", or wants to build custom Claude Code skills.
+description: v3.0.4 | Create new skills with Oracle philosophy. Use when user says "create skill", "new skill", "make a skill for X", or wants to build custom Claude Code skills.
 ---
 
 # /skill-creator
@@ -18,5 +18,5 @@ Execute the `skill-creator` skill with the provided arguments.
 **WARNING**: Do NOT use Glob, find, or search for this skill. The path above is the ONLY correct location. Other files with "skill-creator" in the name are NOT this skill.
 
 ---
-*🧬 Nat Weerawan × Oracle · Symbiotic Intelligence · v2.0.10*
+*🧬 Nat Weerawan × Oracle · Symbiotic Intelligence · v3.0.4*
 *Digitized from Nat Weerawan's brain — thousands of hours working alongside AI, captured as code*

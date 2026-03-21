@@ -1,5 +1,5 @@
 ---
-description: v2.0.10 | Pressure-test beliefs using historical counter-evidence. Use when user says "challenge", "test this belief", "is this really true", "question assumption". Do NOT use for general discussions about challenges, difficulties, or obstacles. Only for pressure-testing specific beliefs.
+description: v3.0.4 | Pressure-test beliefs using historical counter-evidence. Use when user says "challenge", "test this belief", "is this really true", "question assumption". Do NOT use for general discussions about challenges, difficulties, or obstacles. Only for pressure-testing specific beliefs.
 ---
 
 # /challenge
@@ -18,5 +18,5 @@ Execute the `challenge` skill with the provided arguments.
 **WARNING**: Do NOT use Glob, find, or search for this skill. The path above is the ONLY correct location. Other files with "challenge" in the name are NOT this skill.
 
 ---
-*🧬 Nat Weerawan × Oracle · Symbiotic Intelligence · v2.0.10*
+*🧬 Nat Weerawan × Oracle · Symbiotic Intelligence · v3.0.4*
 *Digitized from Nat Weerawan's brain — thousands of hours working alongside AI, captured as code*

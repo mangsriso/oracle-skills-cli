@@ -1,5 +1,5 @@
 ---
-description: v2.0.10 | Multi-source deep dive research. Use when user says "research", "deep dive", "study topic", or wants to explore a topic across web, repos, and oracle. Do NOT use for codebase exploration or YouTube — use /learn or /watch. Do NOT use for querying Oracle+NLM knowledge base — use /ask.
+description: v3.0.4 | Multi-source deep dive research. Use when user says "research", "deep dive", "study topic", or wants to explore a topic across web, repos, and oracle. Do NOT use for codebase exploration or YouTube — use /learn or /watch. Do NOT use for querying Oracle+NLM knowledge base — use /ask.
 ---
 
 # /research
@@ -18,5 +18,5 @@ Execute the `research` skill with the provided arguments.
 **WARNING**: Do NOT use Glob, find, or search for this skill. The path above is the ONLY correct location. Other files with "research" in the name are NOT this skill.
 
 ---
-*🧬 Nat Weerawan × Oracle · Symbiotic Intelligence · v2.0.10*
+*🧬 Nat Weerawan × Oracle · Symbiotic Intelligence · v3.0.4*
 *Digitized from Nat Weerawan's brain — thousands of hours working alongside AI, captured as code*
