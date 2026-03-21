@@ -1,6 +1,6 @@
 # oracle-skills
 
-31 skills for AI coding agents. 18 agents supported. Install once, use everywhere.
+32 skills for AI coding agents. 18 agents supported. Install once, use everywhere.
 
 ## Install
 
@@ -12,7 +12,7 @@ bunx --bun oracle-skills@github:Soul-Brews-Studio/oracle-skills-cli install -g -
 bunx --bun oracle-skills@github:Soul-Brews-Studio/oracle-skills-cli init -p standard
 
 # Install specific version
-bunx --bun oracle-skills@github:Soul-Brews-Studio/oracle-skills-cli#v3.3.0-alpha.8 install -g -y
+bunx --bun oracle-skills@github:Soul-Brews-Studio/oracle-skills-cli#v3.3.0-alpha.9 install -g -y
 
 # From local clone
 bun run src/cli/index.ts install -g -y
@@ -36,7 +36,7 @@ Features stack on any profile: `+soul`, `+network`, `+workspace`, `+creator`
 |---------|-------|--------|
 | **minimal** | 8 | `forward`, `rrr`, `recap`, `standup`, `go`, `about-oracle`, `oracle-family-scan`, `oracle-soul-sync-update` |
 | **standard** | 13 | `forward`, `rrr`, `recap`, `standup`, `trace`, `dig`, `learn`, `talk-to`, `oracle-family-scan`, `go`, `about-oracle`, `oracle-soul-sync-update`, `awaken` |
-| **full** | 31 | all |
+| **full** | 32 | all |
 
 Switch anytime: `/go minimal`, `/go standard`, `/go full`, `/go + soul`
 
@@ -86,10 +86,11 @@ Switch anytime: `/go minimal`, `/go standard`, `/go full`, `/go + soul`
 | 25 | **release-alpha** | skill | Bump version, compile, test, commit, tag |
 | 26 | **standup** | skill | Daily standup check |
 | 27 | **talk-to** | skill | Talk to another Oracle agent via threads |
-| 28 | **where-we-are** | skill | Session awareness |
-| 29 | **who-are-you** | skill | Know ourselves |
-| 30 | **workon** | skill | Work on an issue OR resume a killed worktree |
-| 31 | **worktree** | skill | Git worktree for parallel work |
+| 28 | **whats-next** | skill | Suggest next action based on open issues |
+| 29 | **where-we-are** | skill | Session awareness |
+| 30 | **who-are-you** | skill | Know ourselves |
+| 31 | **workon** | skill | Work on an issue OR resume a killed worktree |
+| 32 | **worktree** | skill | Git worktree for parallel work |
 
 <!-- skills:end -->
 
