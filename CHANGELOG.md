@@ -1,5 +1,16 @@
 # Changelog
 
+## v3.6.1 (2026-04-05)
+
+**Bug fixes + issue cleanup**
+
+- Fix: restore rrr DEEP.md — was deleted in v3.4.0 refactor, /rrr --deep now works (#192)
+- Closed #195 (dream shipped in v3.6.0)
+- Closed #179 (/go simplified, bare CLI calls removed)
+- Closed #166 (hooks are personal config, not CLI)
+- Closed #194 (awaken template already correct)
+- Closed #165 (repo name refs verified correct)
+
 ## v3.6.0 (2026-04-05)
 
 ### Simplify profiles, add /dream + /feel (#196)
