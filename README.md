@@ -1,30 +1,30 @@
 # arra-oracle-skills-cli
 
-30 skills for AI coding agents. Give your AI persistent memory, session awareness, and collaborative tools.
+31 skills for AI coding agents. Give your AI persistent memory, session awareness, and collaborative tools.
 
 ## Install
 
 ```bash
 # Claude Code — standard profile (default)
-npx arra-oracle-skills@3.7.5 install -g -y --agent claude-code
+npx arra-oracle-skills@3.8.0-alpha.1 install -g -y --agent claude-code
 
 # Full profile (all skills)
-npx arra-oracle-skills@3.7.5 install -g -y -p full --agent claude-code
+npx arra-oracle-skills@3.8.0-alpha.1 install -g -y -p full --agent claude-code
 
 # Lab profile (full + experimental)
-npx arra-oracle-skills@3.7.5 install -g -y -p lab --agent claude-code
+npx arra-oracle-skills@3.8.0-alpha.1 install -g -y -p lab --agent claude-code
 
 # Specific skills only
-npx arra-oracle-skills@3.7.5 install -g -y -s recap rrr trace --agent claude-code
+npx arra-oracle-skills@3.8.0-alpha.1 install -g -y -s recap rrr trace --agent claude-code
 
 # Other agents (skills + commands)
-npx arra-oracle-skills@3.7.5 install -g -y --agent codex --with-commands
-npx arra-oracle-skills@3.7.5 install -g -y --agent opencode --with-commands
-npx arra-oracle-skills@3.7.5 install -g -y --agent cursor
-npx arra-oracle-skills@3.7.5 install -g -y --agent gemini-cli --with-commands
+npx arra-oracle-skills@3.8.0-alpha.1 install -g -y --agent codex --with-commands
+npx arra-oracle-skills@3.8.0-alpha.1 install -g -y --agent opencode --with-commands
+npx arra-oracle-skills@3.8.0-alpha.1 install -g -y --agent cursor
+npx arra-oracle-skills@3.8.0-alpha.1 install -g -y --agent gemini-cli --with-commands
 
 # Multiple agents
-npx arra-oracle-skills@3.7.5 install -g -y --agent claude-code codex opencode
+npx arra-oracle-skills@3.8.0-alpha.1 install -g -y --agent claude-code codex opencode
 ```
 
 18 agents: Claude Code, Codex, OpenCode, Cursor, Gemini CLI, Amp, Kilo Code, Roo Code, Goose, Antigravity, GitHub Copilot, OpenClaw, Droid, Windsurf, Cline, Aider, Continue, Zed
@@ -46,27 +46,28 @@ npx arra-oracle-skills@3.7.5 install -g -y --agent claude-code codex opencode
 | - |  |  |  |
 | 8 | **auto-retrospective** | skill | Configure auto-rrr |
 | 9 | **awaken** | skill | "Guided Oracle birth and awakening ritual |
-| 10 | **contacts** | skill | Manage Oracle contacts |
-| 11 | **create-shortcut** | skill | Create local skills as shortcuts |
-| 12 | **dig** | skill | Mine Claude Code sessions |
-| 13 | **dream** | skill | "Cross-repo pattern discovery |
-| 14 | **feel** | skill | "Capture how the system feels |
-| 15 | **forward** | skill | Create handoff + enter plan mode for next |
-| 16 | **go** | skill | 'Switch skill profiles or fresh install |
-| 17 | **i-believe** | skill | "Declare belief |
-| 18 | **inbox** | skill | Read and write to Oracle inbox |
-| 19 | **incubate** | skill | Clone or create repos for active development |
-| 20 | **oracle-soul-sync-update** | skill | Sync Oracle instruments with the family |
-| 21 | **philosophy** | skill | Display Oracle philosophy |
-| 22 | **resonance** | skill | Capture a resonance moment |
-| 23 | **standup** | skill | Daily standup check |
-| 24 | **talk-to** | skill | Talk to another Oracle agent |
-| 25 | **team-agents** | skill | Spin up coordinated agent teams for any task |
-| 26 | **trace** | skill | Find projects, code |
-| 27 | **vault** | skill | Connect external knowledge bases (Obsidian |
-| 28 | **where-we-are** | skill | Session awareness |
-| 29 | **who-are-you** | skill | Know ourselves |
-| 30 | **xray** | skill | X-ray deep scan |
+| 10 | **bampenpien** | skill | "บำเพ็ญเพียร |
+| 11 | **contacts** | skill | Manage Oracle contacts |
+| 12 | **create-shortcut** | skill | Create local skills as shortcuts |
+| 13 | **dig** | skill | Mine Claude Code sessions |
+| 14 | **dream** | skill | "Cross-repo pattern discovery |
+| 15 | **feel** | skill | "Capture how the system feels |
+| 16 | **forward** | skill | Create handoff + enter plan mode for next |
+| 17 | **go** | skill | 'Switch skill profiles or fresh install |
+| 18 | **i-believe** | skill | "Declare belief |
+| 19 | **inbox** | skill | Read and write to Oracle inbox |
+| 20 | **incubate** | skill | Clone or create repos for active development |
+| 21 | **oracle-soul-sync-update** | skill | Sync Oracle instruments with the family |
+| 22 | **philosophy** | skill | Display Oracle philosophy |
+| 23 | **resonance** | skill | Capture a resonance moment |
+| 24 | **standup** | skill | Daily standup check |
+| 25 | **talk-to** | skill | Talk to another Oracle agent |
+| 26 | **team-agents** | skill | Spin up coordinated agent teams for any task |
+| 27 | **trace** | skill | Find projects, code |
+| 28 | **vault** | skill | Connect external knowledge bases (Obsidian |
+| 29 | **where-we-are** | skill | Session awareness |
+| 30 | **who-are-you** | skill | Know ourselves |
+| 31 | **xray** | skill | X-ray deep scan |
 
 <!-- skills:end -->
 
@@ -76,9 +77,9 @@ npx arra-oracle-skills@3.7.5 install -g -y --agent claude-code codex opencode
 
 | Profile | Count | Skills |
 |---------|-------|--------|
-| **standard** | 14 | `about-oracle`, `awaken`, `dig`, `forward`, `go`, `learn`, `oracle-family-scan`, `oracle-soul-sync-update`, `recap`, `rrr`, `standup`, `talk-to`, `trace`, `xray` |
-| **full** | 30 | all |
-| **lab** | 30 | all |
+| **standard** | 15 | `about-oracle`, `awaken`, `create-shortcut`, `dig`, `forward`, `go`, `learn`, `oracle-family-scan`, `oracle-soul-sync-update`, `recap`, `rrr`, `standup`, `talk-to`, `trace`, `xray` |
+| **full** | 31 | all |
+| **lab** | 31 | all |
 
 Switch anytime: `/go standard`, `/go full`, `/go lab`
 

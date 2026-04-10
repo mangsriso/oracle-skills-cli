@@ -1,5 +1,17 @@
 # Changelog
 
+## v3.8.0-alpha.1 (2026-04-10)
+
+### `/bampenpien` + `create-shortcut` promoted to standard
+
+- `/bampenpien` — บำเพ็ญเพียร diligent practice skill (lab). Guided conversation between human and Oracle about doing hard things without knowing why. Like /awaken but repeatable — a practice, not a birth.
+- Modes: default (full conversation), `--reflect` (3 questions), `--history` (timeline), `--share` (format for FB/community)
+- All questions bilingual (EN + TH), logs to `ψ/memory/resonance/practice/`
+- `create-shortcut` promoted from lab → standard profile
+- 31 skills, standard=15, full=22, lab=31, 124 tests
+
+---
+
 ## v3.7.5 (2026-04-10)
 
 ### `/i-believe` — Pulse. Spark. Flame.
