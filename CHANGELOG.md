@@ -1,5 +1,16 @@
 # Changelog
 
+## v3.7.3 (2026-04-10)
+
+### `/talk-to` contacts integration + `/trace --dig` combo
+
+- `/talk-to` — contacts-first routing, "not found" handler, `--inbox` transport, contacts maw names (#209, #210)
+- `/trace --deep --dig` — combo mode runs trace deep + dig session mining in parallel (#208)
+- `/go cleanup` — installer field detection fix, combined crosscheck + usage table (#207)
+- 29 skills, 124 tests
+
+---
+
 ## v3.7.2 (2026-04-10)
 
 ### `/team-agents` lab skill + auto-retrospective silent mode
