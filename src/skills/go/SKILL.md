@@ -1,7 +1,8 @@
 ---
 name: go
-description: 'Switch skill profiles (standard/full/lab) or fresh install via arra-oracle-skills CLI. EXPLICIT slash command ONLY — never auto-invoke. Trigger ONLY when user literally types "/go" as a slash command, or explicitly says "go standard", "go full", "go lab", "go cleanup", "go enable", "go disable", "switch profile", "reinstall skills". Do NOT trigger for common phrases like "let''s go", "go ahead", "ready to go", "go for it", "go on", "here we go", "gotta go" — these are NOT invocations of this skill. Do NOT trigger for Go programming language questions. When in doubt, do NOT invoke — this skill modifies installed skills and is destructive.'
+description: Switch skill profiles (standard/full/lab), fresh install, or enable/disable specific skills via arra-oracle-skills CLI. Destructive — modifies globally installed skills.
 argument-hint: "<standard|full|lab|cleanup> | enable|disable <skill...>"
+disable-model-invocation: true
 ---
 
 # /go

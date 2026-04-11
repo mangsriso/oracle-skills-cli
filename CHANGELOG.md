@@ -1,5 +1,16 @@
 # Changelog
 
+## v3.8.0-alpha.3 (2026-04-11)
+
+### `/go` uses official `disable-model-invocation` flag
+
+- `/go` frontmatter: replaced description-based anti-trigger hack with official `disable-model-invocation: true` field
+- Model can no longer auto-invoke `/go` from conversation — slash command only
+- Description no longer loaded into model context (zero false positives)
+- **Why**: Claude Code has a proper frontmatter mechanism for this exact case. Anti-trigger language in descriptions is fragile; the flag is canonical. Source: https://code.claude.com/docs/en/skills.md
+
+---
+
 ## v3.8.0-alpha.2 (2026-04-11)
 
 ### `/go` anti-trigger fix — no more accidental profile switches
