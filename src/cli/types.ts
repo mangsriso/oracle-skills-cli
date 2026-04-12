@@ -36,6 +36,7 @@ export interface Skill {
   description: string;
   path: string;
   hidden?: boolean; // If true, install SKILL.md but skip command stub (hidden from autocomplete)
+  secret?: boolean; // If true, excluded from ALL profiles — install only by name (-s flag)
 }
 
 import type { ShellMode } from './fs-utils.js';

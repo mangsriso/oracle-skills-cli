@@ -7,7 +7,7 @@
  */
 
 // Skills that are lab-only (experimental, not in standard or full)
-export const labOnly = ['bampenpien', 'contacts', 'dream', 'feel', 'i-believe', 'inbox', 'schedule', 'team-agents', 'vault'];
+export const labOnly = ['bampenpien', 'contacts', 'dream', 'feel', 'i-believed', 'inbox', 'schedule', 'team-agents', 'vault'];
 
 export const profiles: Record<string, { include?: string[]; exclude?: string[] }> = {
   standard: {
@@ -25,23 +25,28 @@ export const profiles: Record<string, { include?: string[]; exclude?: string[] }
 
 /**
  * Resolve a profile to a filtered list of skill names.
- * Returns null for profiles that mean "all skills" (lab).
+ * Returns null for profiles that mean "all skills" (lab) — unless secrets exist.
+ * Secret skills are excluded from ALL profiles; install by name only (-s flag).
  */
 export function resolveProfile(
   profileName: string,
-  allSkillNames: string[]
+  allSkillNames: string[],
+  secretSkillNames?: string[]
 ): string[] | null {
+  const secrets = new Set(secretSkillNames || []);
   const profile = profiles[profileName];
   if (!profile) return null;
 
   if (profile.include && profile.include.length > 0) {
-    return profile.include;
+    return profile.include.filter((s) => !secrets.has(s));
   }
 
   if (profile.exclude && profile.exclude.length > 0) {
-    return allSkillNames.filter((s) => !profile.exclude!.includes(s));
+    return allSkillNames.filter((s) => !profile.exclude!.includes(s) && !secrets.has(s));
   }
 
-  // Empty = all skills (lab)
-  return null;
+  // Empty = all skills (lab) — but still exclude secrets
+  return secretSkillNames && secretSkillNames.length > 0
+    ? allSkillNames.filter((s) => !secrets.has(s))
+    : null;
 }

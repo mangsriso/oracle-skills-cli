@@ -72,7 +72,8 @@ export async function installSkills(
 
   if (options.profile) {
     const allNames = allSkills.map((s) => s.name);
-    profileSkillNames = resolveProfile(options.profile, allNames);
+    const secretNames = allSkills.filter((s) => s.secret).map((s) => s.name);
+    profileSkillNames = resolveProfile(options.profile, allNames, secretNames);
 
     if (profileSkillNames) {
       const extras = options.skills || [];

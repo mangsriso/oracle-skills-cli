@@ -52,6 +52,7 @@ export function registerList(program: Command) {
           for (const skill of skillDirs) {
             let version = '';
             let hidden = false;
+            let secret = false;
             const skillMdPath = join(skillsDir, skill, 'SKILL.md');
             if (existsSync(skillMdPath)) {
               try {
@@ -61,9 +62,10 @@ export function registerList(program: Command) {
                   version = ` (v${versionMatch[1]})`;
                 }
                 hidden = /hidden:\s*(true|yes)/i.test(content);
+                secret = /secret:\s*(true|yes)/i.test(content);
               } catch {}
             }
-            const hiddenTag = hidden ? ' [hidden]' : '';
+            const hiddenTag = hidden ? ' [hidden]' : secret ? ' [secret]' : '';
             console.log(`    - ${skill}${version}${hiddenTag}`);
           }
           totalSkills += skillDirs.length;

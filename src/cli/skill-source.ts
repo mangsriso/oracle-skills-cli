@@ -63,11 +63,13 @@ export async function discoverSkills(): Promise<Skill[]> {
       if (skillMd) {
         const descMatch = skillMd.match(/description:\s*(.+)/);
         const hiddenMatch = skillMd.match(/hidden:\s*(true|yes)/i);
+        const secretMatch = skillMd.match(/secret:\s*(true|yes)/i);
         skills.push({
           name,
           description: descMatch?.[1]?.trim() || '',
           path: `vfs://${name}`, // Virtual path marker
           ...(hiddenMatch ? { hidden: true } : {}),
+          ...(secretMatch ? { secret: true } : {}),
         });
       }
     }
@@ -89,11 +91,13 @@ export async function discoverSkills(): Promise<Skill[]> {
       const content = await Bun.file(skillMdPath).text();
       const descMatch = content.match(/description:\s*(.+)/);
       const hiddenMatch = content.match(/hidden:\s*(true|yes)/i);
+      const secretMatch = content.match(/secret:\s*(true|yes)/i);
       skills.push({
         name,
         description: descMatch?.[1]?.trim() || '',
         path: join(skillsPath, name),
         ...(hiddenMatch ? { hidden: true } : {}),
+        ...(secretMatch ? { secret: true } : {}),
       });
     }
   }

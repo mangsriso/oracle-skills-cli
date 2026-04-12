@@ -44,9 +44,10 @@ export function registerSelect(program: Command, version: string) {
           }
         }
 
+        const visibleSkills = allSkills.filter((s) => !s.secret);
         const selected = await p.multiselect({
-          message: `Select skills to install (${allSkills.length} available):`,
-          options: allSkills
+          message: `Select skills to install (${visibleSkills.length} available):`,
+          options: visibleSkills
             .sort((a, b) => a.name.localeCompare(b.name))
             .map((s) => ({
               value: s.name,
