@@ -105,7 +105,13 @@ print(', '.join(m['name'] for m in config.get('members', [])))
     ;;
 
   mailbox)
-    bash "$SCRIPT_DIR/mailbox.sh" "$@"
+    # /mailbox is its own skill — data lives in ψ/, not ~/.claude/
+    MAILBOX_SCRIPT="$(dirname "$SCRIPT_DIR")/../mailbox/scripts/mailbox.sh"
+    if [ -f "$MAILBOX_SCRIPT" ]; then
+      bash "$MAILBOX_SCRIPT" "$@"
+    else
+      bash "$HOME/.claude/skills/mailbox/scripts/mailbox.sh" "$@" 2>/dev/null || echo "📬 /mailbox skill not installed. Run: /go enable mailbox"
+    fi
     ;;
 
   help|--help|-h)

@@ -1,6 +1,6 @@
 # arra-oracle-skills-cli
 
-39 skills for AI coding agents. Give your AI persistent memory, session awareness, and collaborative tools.
+40 skills for AI coding agents. Give your AI persistent memory, session awareness, and collaborative tools.
 
 ## Install
 
@@ -60,22 +60,23 @@ npx arra-oracle-skills@3.9.0-alpha.1 install -g -y --agent claude-code codex ope
 | 21 | **inbox** | skill | Read and write to Oracle inbox |
 | 22 | **incubate** | skill | Clone or create repos for active development |
 | 23 | **machines** | skill | 'Fleet machines |
-| 24 | **morpheus** | skill | 'Speculative dreaming |
-| 25 | **oracle-soul-sync-update** | skill | Sync Oracle instruments with the family |
-| 26 | **philosophy** | skill | Display Oracle philosophy |
-| 27 | **release** | skill | 'Automated release flow |
-| 28 | **resonance** | skill | Capture a resonance moment |
-| 29 | **standup** | skill | Daily standup check |
-| 30 | **talk-to** | skill | Talk to another Oracle agent |
-| 31 | **team-agents** | skill | Spin up coordinated agent teams for any task |
-| 32 | **trace** | skill | Find projects, code |
-| 33 | **vault** | skill | Connect external knowledge bases (Obsidian |
-| 34 | **warp** | skill | 'Teleport to a remote oracle node |
-| 35 | **watch** | skill | 'Extract YouTube video transcripts |
-| 36 | **where-we-are** | skill | Session awareness |
-| 37 | **who-are-you** | skill | Know ourselves |
-| 38 | **wormhole** | skill | 'Federated query proxy |
-| 39 | **xray** | skill | X-ray deep scan |
+| 24 | **mailbox** | skill | 'Persistent agent mailbox |
+| 25 | **morpheus** | skill | 'Speculative dreaming |
+| 26 | **oracle-soul-sync-update** | skill | Sync Oracle instruments with the family |
+| 27 | **philosophy** | skill | Display Oracle philosophy |
+| 28 | **release** | skill | 'Automated release flow |
+| 29 | **resonance** | skill | Capture a resonance moment |
+| 30 | **standup** | skill | Daily standup check |
+| 31 | **talk-to** | skill | Talk to another Oracle agent |
+| 32 | **team-agents** | skill | Spin up coordinated agent teams for any task |
+| 33 | **trace** | skill | Find projects, code |
+| 34 | **vault** | skill | Connect external knowledge bases (Obsidian |
+| 35 | **warp** | skill | 'Teleport to a remote oracle node |
+| 36 | **watch** | skill | 'Extract YouTube video transcripts |
+| 37 | **where-we-are** | skill | Session awareness |
+| 38 | **who-are-you** | skill | Know ourselves |
+| 39 | **wormhole** | skill | 'Federated query proxy |
+| 40 | **xray** | skill | X-ray deep scan |
 
 <!-- skills:end -->
 
@@ -86,8 +87,8 @@ npx arra-oracle-skills@3.9.0-alpha.1 install -g -y --agent claude-code codex ope
 | Profile | Count | Skills |
 |---------|-------|--------|
 | **standard** | 15 | `about-oracle`, `awaken`, `create-shortcut`, `dig`, `forward`, `go`, `learn`, `oracle-family-scan`, `oracle-soul-sync-update`, `recap`, `rrr`, `standup`, `talk-to`, `trace`, `xray` |
-| **full** | 39 | all |
-| **lab** | 39 | all |
+| **full** | 40 | all |
+| **lab** | 40 | all |
 
 Switch anytime: `/go standard`, `/go full`, `/go lab`
 

@@ -273,7 +273,7 @@ TeamDelete()
 ```bash
 # 1. Archive each agent's findings to persistent mailbox (ψ/memory/mailbox/)
 for agent in security performance testing; do
-  bash ~/.claude/skills/team-agents/scripts/mailbox.sh archive $agent pr-review
+  bash ~/.claude/skills/mailbox/scripts/mailbox.sh archive $agent pr-review
 done
 
 # 2. Archive ephemeral skills to /tmp (Nothing is Deleted)
@@ -530,7 +530,7 @@ Each skill wraps `SendMessage` — user says `/scout explore X`, lead relays to 
 **Pre-load mailbox context (if agent has previous findings):**
 
 ```bash
-MAILBOX_CONTEXT=$(bash ~/.claude/skills/team-agents/scripts/mailbox.sh load [agent-name] 2>/dev/null)
+MAILBOX_CONTEXT=$(bash ~/.claude/skills/mailbox/scripts/mailbox.sh load [agent-name] 2>/dev/null)
 ```
 
 If mailbox has content, inject it into the spawn prompt so the agent starts with memory of previous sessions.
