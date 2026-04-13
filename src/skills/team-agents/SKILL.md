@@ -31,6 +31,7 @@ Without this flag, TeamCreate/SendMessage/TaskList tools don't exist. Fall back 
 /team-agents "refactor auth module" --roles 3
 /team-agents "research X" --model haiku
 /team-agents "implement feature Y" --plan
+/team-agents --manual "build feature Z"    # spawn agents, user controls
 /team-agents status                    # show running team
 /team-agents shutdown                  # graceful shutdown
 ```
@@ -293,6 +294,146 @@ Team: pr-review (active)
 ```
 
 Uses TaskList to get current state.
+
+---
+
+## /team-agents --manual Mode (#219)
+
+> "You name them. You control them. They execute."
+
+Manual mode spawns named agents but does NOT auto-orchestrate. The human directs each agent via the lead. The lead relays commands and compiles results.
+
+### Why Manual?
+
+| Auto Mode | Manual Mode |
+|-----------|-------------|
+| Lead designs roles + tasks | Human designs roles + tasks |
+| Lead dispatches all agents | Human says "tell security to check auth" |
+| Lead compiles automatically | Human reviews each report, gives next order |
+| Fast, parallel, fire-and-forget | Deliberate, sequential, human-in-the-loop |
+
+**Use manual when**: you want to name specific agents, control what they investigate, direct them step-by-step, or use team agents as persistent workers you can message throughout the session.
+
+### Step 1: Parse + Show Team
+
+```
+/team-agents --manual "build the auth feature"
+```
+
+Lead proposes team (same as auto mode):
+
+```
+🤖 Manual team: auth-build (3 agents)
+
+  Name         Role                            Model
+  ──────────── ──────────────────────────────── ────────
+  architect    Design auth flow + data model    sonnet
+  builder      Implement code changes           sonnet
+  tester       Write tests + verify             sonnet
+
+  Manual mode: agents wait for YOUR commands.
+  
+  Commands:
+    "tell architect to design the auth flow"
+    "ask builder to implement login endpoint"
+    "send tester the code to review"
+    "/team-agents status" — check who's done
+    "/team-agents shutdown" — end team
+
+Spawn team? [Y/n]
+```
+
+### Step 2: Spawn Agents (idle)
+
+```
+TeamCreate("auth-build")
+```
+
+Spawn each agent with a standby prompt:
+
+```
+Agent({
+  name: "[role-name]",
+  team_name: "[team-name]",
+  model: "sonnet",
+  prompt: `You are [ROLE] on team "[TEAM_NAME]" in MANUAL mode.
+
+REPO: [ABSOLUTE_PATH]
+ROLE: [ROLE_DESCRIPTION]
+
+You are in standby. Wait for instructions from the lead.
+When you receive a message via SendMessage:
+1. Read the instruction
+2. Execute the work
+3. Report back: SendMessage({
+     to: "team-lead@[TEAM_NAME]",
+     summary: "[5-10 word summary]",
+     message: "[findings, max 500 words]"
+   })
+4. Return to standby — wait for next instruction
+
+Rules:
+- Do NOT start working until instructed
+- Report via SendMessage ONLY — do NOT write files
+- Max 500 words per report
+- Be specific — paths, lines, evidence`
+})
+```
+
+### Step 3: Human Directs
+
+The human talks to the lead. The lead relays instructions to specific agents:
+
+**Human says**: "tell architect to design the login flow"
+
+**Lead does**:
+```
+SendMessage({
+  to: "architect",
+  summary: "New instruction: design login flow",
+  message: "Design the login flow for our auth system. Include: data model, API endpoints, session handling. Report back when done."
+})
+```
+
+**Lead reports**: "Sent to architect. Waiting for response..."
+
+When architect reports back via SendMessage, lead shows the human:
+
+```
+📨 Report from architect:
+
+  [architect's findings]
+
+  💡 Next? "tell builder to implement this" / "ask architect for more detail"
+```
+
+### Step 4: Human Reviews + Directs Next
+
+The human can:
+- **Direct another agent**: "tell builder to implement the login endpoint based on architect's design"
+- **Ask for more detail**: "ask architect about session storage"
+- **Check status**: `/team-agents status`
+- **Shut down**: `/team-agents shutdown`
+
+### Step 5: Compile (on demand)
+
+When human says "compile" or "report":
+
+```
+Lead compiles all SendMessage reports received so far into a structured summary.
+Same format as auto mode Step 5.
+```
+
+### Key Differences from Auto
+
+| Aspect | Auto | Manual |
+|--------|------|--------|
+| Who designs tasks? | Lead | Human |
+| When do agents start? | Immediately after spawn | When human says "tell X to..." |
+| Who compiles? | Lead (automatically) | Lead (when human says "compile") |
+| Can human redirect? | No — fire-and-forget | Yes — at every step |
+| Token efficiency | Higher (one shot) | Lower (more round-trips) |
+| Control | Less | Full |
 
 ---
 

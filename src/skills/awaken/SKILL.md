@@ -90,9 +90,45 @@ If `--reawaken` argument passed, skip wizard entirely — go to --reawaken flow 
 
 ---
 
-## Phase 0: System Check (ทั้ง 2 mode — อัตโนมัติ)
+## Phase 0: System Check + Context Pressure (#215)
 
 > "ตรวจระบบก่อนสร้าง"
+
+### Context Pressure Detection
+
+Before system check, detect if the session is under context pressure:
+
+```bash
+# Check if this session has been running long (many messages processed)
+ENCODED_PWD=$(echo "$(git rev-parse --show-toplevel 2>/dev/null || pwd)" | sed 's|^/|-|; s|[/.]|-|g')
+PROJECT_DIR="$HOME/.claude/projects/${ENCODED_PWD}"
+LATEST_JSONL=$(ls -t "$PROJECT_DIR"/*.jsonl 2>/dev/null | head -1)
+if [ -n "$LATEST_JSONL" ]; then
+  FILE_SIZE=$(stat -c%s "$LATEST_JSONL" 2>/dev/null || stat -f%z "$LATEST_JSONL" 2>/dev/null)
+  # If session file > 5MB, we're deep into context
+  if [ "$FILE_SIZE" -gt 5242880 ] 2>/dev/null; then
+    echo "CONTEXT_PRESSURE=high"
+  elif [ "$FILE_SIZE" -gt 2097152 ] 2>/dev/null; then
+    echo "CONTEXT_PRESSURE=medium"
+  else
+    echo "CONTEXT_PRESSURE=low"
+  fi
+fi
+```
+
+If context pressure is detected during /awaken:
+
+| Level | Action |
+|-------|--------|
+| `low` | Continue normally |
+| `medium` | Show hint: "💡 Context getting full — /awaken --fast recommended to save context" |
+| `high` | Warn: "⚠️ Context pressure high. Recommend: /forward first, then /awaken in fresh session" |
+
+**Context pressure also applies outside /awaken.** Any skill can check this pattern. When pressure is high:
+- Suggest `/forward` to save progress
+- Suggest `/rrr` to capture lessons before context loss
+- Prefer `--fast` modes over deep modes
+- Avoid spawning subagent teams (they multiply context usage)
 
 Auto-detect and fix. Run ALL checks silently, then display results.
 

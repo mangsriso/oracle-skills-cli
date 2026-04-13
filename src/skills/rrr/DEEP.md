@@ -121,10 +121,34 @@ oracle_learn({
 })
 ```
 
-## Step 5: Commit
+## Anti-Rationalization Guard (Deep Mode)
 
-```bash
-cd "$ORACLE_ROOT"
-git add ψ/memory/retrospectives/ ψ/memory/learnings/
-git commit -m "rrr: deep analysis - [slug]"
-```
+Before compiling the final retro from agent reports, the lead agent must scan for:
+
+### Cross-Agent Verification
+
+| Check | How |
+|-------|-----|
+| Git agent claims vs file agent claims | Do commit counts match file change counts? |
+| Timeline gaps | Are there periods with no activity? What happened? |
+| Pattern agent excuses | Did the pattern agent flag uncomfortable truths or only victories? |
+| Oracle connections | Are past learnings being applied or ignored? |
+
+### Deep-Mode Red Flags
+
+- Agent 1 reports 20 commits but Agent 2 only found 5 changed files → investigate
+- Agent 4 found zero mistakes → suspiciously clean, push for honesty
+- Agent 5 found no connections to past learnings → are we repeating patterns?
+- Any agent returned < 100 words → they may have hit a wall and given up
+- Multiple agents reached the same conclusion independently → high confidence
+- Agents contradict each other → the truth is probably between them, investigate
+
+### Lead's Responsibility
+
+The lead MUST include at least one finding from the anti-rationalization scan in the AI Diary. If all agents agree and everything looks clean, say so — but name the check you ran. "I verified cross-agent consistency and found no discrepancies" is better than skipping the check.
+
+---
+
+## Step 5: Save
+
+**Do NOT `git add ψ/`** — vault files are shared state, not committed to repos.

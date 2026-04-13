@@ -112,6 +112,37 @@ TeamDelete()
 
 **Do NOT `git add ψ/`** — vault files are shared state, not committed to repos.
 
+## Anti-Rationalization Guard (Teammate Mode)
+
+Before writing the final retro, the lead must cross-check teammate reports:
+
+### Teammate Cross-Verification
+
+| Agent | Check Against | Look For |
+|-------|--------------|----------|
+| Analyst | git log directly | Did they miss commits? Inflate activity? |
+| Patterns | Analyst's timeline | Do patterns match what actually happened? |
+| Oracle | Previous retros | Are we repeating the same "lessons learned"? |
+
+### Red Flags in Teammate Reports
+
+- **Analyst timeline has no friction**: Every session has friction. If absent, push back.
+- **Patterns agent only found positives**: Request negative patterns too.
+- **Oracle found no connections**: Either memory is empty or search was shallow.
+- **Any agent completed in < 30 seconds**: Likely superficial. Consider resending with more specific instructions.
+- **Reports contradict each other**: Flag in AI Diary, don't silently pick one.
+
+### Lead's Anti-Rationalization Duty
+
+Include in the AI Diary:
+1. At least ONE uncomfortable truth from the session
+2. At least ONE thing that went wrong (even if small)
+3. A candid assessment of whether the team approach added value or was overhead
+
+If you catch yourself writing "everything went well" — stop and dig deeper.
+
+---
+
 ## Pitfalls & Fixes
 
 1. **Wrong lead ID**: Always use `team-lead@rrr-deep` (fully qualified)

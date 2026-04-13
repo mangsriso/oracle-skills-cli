@@ -1,6 +1,6 @@
 # arra-oracle-skills-cli
 
-37 skills for AI coding agents. Give your AI persistent memory, session awareness, and collaborative tools.
+38 skills for AI coding agents. Give your AI persistent memory, session awareness, and collaborative tools.
 
 ## Install
 
@@ -69,11 +69,12 @@ npx arra-oracle-skills@3.8.3 install -g -y --agent claude-code codex opencode
 | 30 | **team-agents** | skill | Spin up coordinated agent teams for any task |
 | 31 | **trace** | skill | Find projects, code |
 | 32 | **vault** | skill | Connect external knowledge bases (Obsidian |
-| 33 | **watch** | skill | 'Extract YouTube video transcripts |
-| 34 | **where-we-are** | skill | Session awareness |
-| 35 | **who-are-you** | skill | Know ourselves |
-| 36 | **wormhole** | skill | 'Federated query proxy |
-| 37 | **xray** | skill | X-ray deep scan |
+| 33 | **warp** | skill | 'Teleport to a remote oracle node |
+| 34 | **watch** | skill | 'Extract YouTube video transcripts |
+| 35 | **where-we-are** | skill | Session awareness |
+| 36 | **who-are-you** | skill | Know ourselves |
+| 37 | **wormhole** | skill | 'Federated query proxy |
+| 38 | **xray** | skill | X-ray deep scan |
 
 <!-- skills:end -->
 
@@ -84,8 +85,8 @@ npx arra-oracle-skills@3.8.3 install -g -y --agent claude-code codex opencode
 | Profile | Count | Skills |
 |---------|-------|--------|
 | **standard** | 15 | `about-oracle`, `awaken`, `create-shortcut`, `dig`, `forward`, `go`, `learn`, `oracle-family-scan`, `oracle-soul-sync-update`, `recap`, `rrr`, `standup`, `talk-to`, `trace`, `xray` |
-| **full** | 37 | all |
-| **lab** | 37 | all |
+| **full** | 38 | all |
+| **lab** | 38 | all |
 
 Switch anytime: `/go standard`, `/go full`, `/go lab`
 
