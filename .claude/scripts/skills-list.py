@@ -4,18 +4,25 @@ Usage: python3 skills-list.py [--json]
 """
 import os, re, sys, json
 
-# Find repo root (works from installed skill dir or source)
+# Find repo root — try multiple paths
 SCRIPT_DIR = os.path.dirname(os.path.abspath(__file__))
-# Try source path first, then installed path
+profiles_path = None
+skills_dir = None
+
 for candidate in [
-    os.path.join(SCRIPT_DIR, '..', '..', '..'),  # src/skills/team-agents/scripts → src
-    os.path.join(SCRIPT_DIR, '..', '..'),
+    os.path.join(SCRIPT_DIR, '..', '..'),           # .claude/scripts → repo root
+    os.path.join(SCRIPT_DIR, '..', '..', '..'),      # src/skills/X/scripts → repo root
+    os.path.join(SCRIPT_DIR, '..', '..'),             # src/skills/X → repo/src
+    os.getcwd(),                                       # current directory
 ]:
-    profiles_path = os.path.join(candidate, 'profiles.ts')
-    skills_dir = os.path.join(candidate, 'skills')
-    if os.path.exists(profiles_path) and os.path.isdir(skills_dir):
+    p = os.path.join(candidate, 'src', 'profiles.ts')
+    s = os.path.join(candidate, 'src', 'skills')
+    if os.path.exists(p) and os.path.isdir(s):
+        profiles_path = p
+        skills_dir = s
         break
-else:
+
+if not profiles_path:
     # Fallback: scan installed skills
     skills_dir = os.path.expanduser('~/.claude/skills')
     profiles_path = None

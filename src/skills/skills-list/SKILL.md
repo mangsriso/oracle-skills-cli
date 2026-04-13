@@ -18,10 +18,15 @@ argument-hint: "[--json]"
 ## Run
 
 ```bash
-python3 ~/.claude/skills/skills-list/scripts/skills-list.py
+python3 .claude/scripts/skills-list.py
 ```
 
-Display the output directly. The script reads STANDARD_SKILLS and LAB_SKILLS from `profiles.ts` (single source of truth) and scans all skill directories.
+The script lives at `.claude/scripts/skills-list.py` in the repo (not in src/skills/). It reads STANDARD_SKILLS and LAB_SKILLS from `profiles.ts` (single source of truth) and scans all skill directories.
+
+If not in the repo directory, fall back:
+```bash
+python3 ~/.claude/skills/skills-list/scripts/skills-list.py
+```
 
 ### Output
 
