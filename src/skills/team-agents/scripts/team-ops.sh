@@ -104,6 +104,10 @@ print(', '.join(m['name'] for m in config.get('members', [])))
     echo ""
     ;;
 
+  mailbox)
+    bash "$SCRIPT_DIR/mailbox.sh" "$@"
+    ;;
+
   help|--help|-h)
     echo ""
     echo "🤖 team-ops — unified team agent CLI"
@@ -116,6 +120,7 @@ print(', '.join(m['name'] for m in config.get('members', [])))
     echo "    shutdown-skills <team> <agents> 📦 Archive skills to /tmp"
     echo "    cleanup [--dry-run]           🧹 Kill idle panes (safe)"
     echo "    killshot                      💀 Kill ALL non-lead panes"
+    echo "    mailbox <cmd> [args]          📬 Persistent agent memory"
     echo "    status                        📊 Show everything"
     echo ""
     echo "  Lifecycle:"

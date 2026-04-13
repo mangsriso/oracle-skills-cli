@@ -268,13 +268,19 @@ SendMessage({ to: "testing", message: { type: "shutdown_request" } })
 TeamDelete()
 ```
 
-**After shutdown, archive ephemeral skills to /tmp** (Nothing is Deleted):
+**After shutdown, archive agent findings to persistent mailbox + skills to /tmp:**
 
 ```bash
+# 1. Archive each agent's findings to persistent mailbox (ψ/memory/mailbox/)
+for agent in security performance testing; do
+  bash ~/.claude/skills/team-agents/scripts/mailbox.sh archive $agent pr-review
+done
+
+# 2. Archive ephemeral skills to /tmp (Nothing is Deleted)
 bash ~/.claude/skills/team-agents/scripts/shutdown-skills.sh pr-review security performance testing
 ```
 
-This moves `/security`, `/performance`, `/testing` skills to `/tmp/team-pr-review-YYYYMMDD_HHMMSS/`. Recoverable if needed.
+Next time you spawn the same agent name, their mailbox context is auto-loaded into the prompt.
 
 **Then clean up panes:**
 
@@ -520,6 +526,14 @@ This creates ephemeral skills at `.claude/skills/{agent}/SKILL.md`:
 - `/tester` — direct channel to tester agent
 
 Each skill wraps `SendMessage` — user says `/scout explore X`, lead relays to scout.
+
+**Pre-load mailbox context (if agent has previous findings):**
+
+```bash
+MAILBOX_CONTEXT=$(bash ~/.claude/skills/team-agents/scripts/mailbox.sh load [agent-name] 2>/dev/null)
+```
+
+If mailbox has content, inject it into the spawn prompt so the agent starts with memory of previous sessions.
 
 Spawn each agent with a standby prompt:
 
