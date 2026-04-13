@@ -11,9 +11,9 @@ const ALL_SKILLS = [
 ].sort();
 
 describe("profiles", () => {
-  it("standard has 15 skills", () => {
-    expect(STANDARD_SKILLS).toHaveLength(15);
-    expect(profiles.standard.include).toHaveLength(15);
+  it("standard has 16 skills", () => {
+    expect(STANDARD_SKILLS).toHaveLength(16);
+    expect(profiles.standard.include).toHaveLength(16);
   });
 
   it("full excludes lab-only skills", () => {
@@ -55,9 +55,9 @@ describe("profiles", () => {
 });
 
 describe("resolveProfile", () => {
-  it("standard returns 15 skills", () => {
+  it("standard returns 16 skills", () => {
     const result = resolveProfile("standard", ALL_SKILLS);
-    expect(result).toHaveLength(15);
+    expect(result).toHaveLength(16);
   });
 
   it("full returns all minus lab-only", () => {

@@ -10,7 +10,7 @@
 export const STANDARD_SKILLS = [
   'about-oracle', 'awaken', 'create-shortcut', 'dig', 'forward', 'go',
   'learn', 'oracle-family-scan', 'oracle-soul-sync-update',
-  'recap', 'rrr', 'standup', 'talk-to', 'trace', 'xray',
+  'recap', 'rrr', 'skills-list', 'standup', 'talk-to', 'trace', 'xray',
 ] as const;
 
 /** Lab-only skills — experimental, not in standard or full */

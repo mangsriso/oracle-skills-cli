@@ -1,6 +1,6 @@
 # arra-oracle-skills-cli
 
-40 skills for AI coding agents. Give your AI persistent memory, session awareness, and collaborative tools.
+41 skills for AI coding agents. Give your AI persistent memory, session awareness, and collaborative tools.
 
 ## Install
 
@@ -66,17 +66,18 @@ npx arra-oracle-skills@3.9.0-alpha.2 install -g -y --agent claude-code codex ope
 | 27 | **philosophy** | skill | Display Oracle philosophy |
 | 28 | **release** | skill | 'Automated release flow |
 | 29 | **resonance** | skill | Capture a resonance moment |
-| 30 | **standup** | skill | Daily standup check |
-| 31 | **talk-to** | skill | Talk to another Oracle agent |
-| 32 | **team-agents** | skill | Spin up coordinated agent teams for any task |
-| 33 | **trace** | skill | Find projects, code |
-| 34 | **vault** | skill | Connect external knowledge bases (Obsidian |
-| 35 | **warp** | skill | 'Teleport to a remote oracle node |
-| 36 | **watch** | skill | 'Extract YouTube video transcripts |
-| 37 | **where-we-are** | skill | Session awareness |
-| 38 | **who-are-you** | skill | Know ourselves |
-| 39 | **wormhole** | skill | 'Federated query proxy |
-| 40 | **xray** | skill | X-ray deep scan |
+| 30 | **skills-list** | skill | 'List all Oracle skills |
+| 31 | **standup** | skill | Daily standup check |
+| 32 | **talk-to** | skill | Talk to another Oracle agent |
+| 33 | **team-agents** | skill | Spin up coordinated agent teams for any task |
+| 34 | **trace** | skill | Find projects, code |
+| 35 | **vault** | skill | Connect external knowledge bases (Obsidian |
+| 36 | **warp** | skill | 'Teleport to a remote oracle node |
+| 37 | **watch** | skill | 'Extract YouTube video transcripts |
+| 38 | **where-we-are** | skill | Session awareness |
+| 39 | **who-are-you** | skill | Know ourselves |
+| 40 | **wormhole** | skill | 'Federated query proxy |
+| 41 | **xray** | skill | X-ray deep scan |
 
 <!-- skills:end -->
 
@@ -86,9 +87,9 @@ npx arra-oracle-skills@3.9.0-alpha.2 install -g -y --agent claude-code codex ope
 
 | Profile | Count | Skills |
 |---------|-------|--------|
-| **standard** | 15 | `about-oracle`, `awaken`, `create-shortcut`, `dig`, `forward`, `go`, `learn`, `oracle-family-scan`, `oracle-soul-sync-update`, `recap`, `rrr`, `standup`, `talk-to`, `trace`, `xray` |
-| **full** | 40 | all |
-| **lab** | 40 | all |
+| **standard** | 16 | `about-oracle`, `awaken`, `create-shortcut`, `dig`, `forward`, `go`, `learn`, `oracle-family-scan`, `oracle-soul-sync-update`, `recap`, `rrr`, `skills-list`, `standup`, `talk-to`, `trace`, `xray` |
+| **full** | 41 | all |
+| **lab** | 41 | all |
 
 Switch anytime: `/go standard`, `/go full`, `/go lab`
 
