@@ -268,6 +268,21 @@ SendMessage({ to: "testing", message: { type: "shutdown_request" } })
 TeamDelete()
 ```
 
+**After shutdown, archive ephemeral skills to /tmp** (Nothing is Deleted):
+
+```bash
+bash ~/.claude/skills/team-agents/scripts/shutdown-skills.sh pr-review security performance testing
+```
+
+This moves `/security`, `/performance`, `/testing` skills to `/tmp/team-pr-review-YYYYMMDD_HHMMSS/`. Recoverable if needed.
+
+**Then clean up panes:**
+
+```bash
+bash ~/.claude/skills/team-agents/scripts/cleanup.sh    # safe — idle only
+bash ~/.claude/skills/team-agents/scripts/killshot.sh    # nuclear — all panes
+```
+
 **Never skip shutdown** — TeamDelete fails if agents are still active.
 **Never broadcast shutdown** — use sequential sends, one per agent.
 
@@ -487,11 +502,24 @@ Lead proposes team (same as auto mode):
 Spawn team? [Y/n]
 ```
 
-### Step 2: Spawn Agents (idle)
+### Step 2: Spawn Agents + Create Live Skills
 
 ```
 TeamCreate("auth-build")
 ```
+
+**After spawning agents, create live skills so user can talk directly:**
+
+```bash
+bash ~/.claude/skills/team-agents/scripts/spawn-skills.sh auth-build architect builder tester
+```
+
+This creates ephemeral skills at `.claude/skills/{agent}/SKILL.md`:
+- `/architect` — direct channel to architect agent
+- `/builder` — direct channel to builder agent
+- `/tester` — direct channel to tester agent
+
+Each skill wraps `SendMessage` — user says `/scout explore X`, lead relays to scout.
 
 Spawn each agent with a standby prompt:
 
