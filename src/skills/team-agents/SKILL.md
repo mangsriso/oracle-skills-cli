@@ -297,6 +297,68 @@ Uses TaskList to get current state.
 
 ---
 
+## /team-agents --panes
+
+> See the machines breathing.
+
+Peek at tmux panes to see team agent processes running alongside the lead. Maps panes to agent names.
+
+### Quick Run (helper script)
+
+One command — runs the full pane scan:
+
+```bash
+bash ~/.claude/skills/team-agents/scripts/panes.sh [team-name]
+```
+
+Pass the team name to map panes to agents. Without it, all non-lead panes show as `(other)`.
+
+### Display
+
+```
+🖥 Team Panes — [session-name] ([PANE_COUNT] panes)
+
+  Pane  Size      Model        Ctx    Agent        Status
+  ───── ───────── ──────────── ────── ──────────── ──────────
+  0     74x55     Opus 4.6     45%    team-lead    ← YOU
+  1     78x8      Opus 4.6     12%    (other)      idle
+  2     78x8      Opus 4.6     13%    (other)      idle
+  3     78x8      Sonnet 4.6    9%    scout        idle
+  4     78x8      Sonnet 4.6   11%    builder      idle
+  5     78x8      Sonnet 4.6   11%    auditor      idle
+  6     78x10     Opus 4.6     12%    (other)      idle
+
+  Team: [team-name] | Agents: 3/6 panes | Non-team: 3
+
+  💡 "tell scout to ..." — direct an agent
+  💡 "/team-agents status" — task progress
+```
+
+### Pane Mapping Rules
+
+1. **Pane 0** is always the lead (largest pane, main claude process)
+2. **Team agents** are identified by reading `~/.claude/teams/[team-name]/config.json` and matching agent count to newest panes (agents spawn after lead, so they're higher pane numbers)
+3. **Non-team panes** (pre-existing before team spawn) shown as `(other)` — they're separate claude instances, not part of this team
+4. **Model extraction**: parse from the status bar line containing model name (e.g., `👁 Mawui Sonnet 4.6`)
+5. **Context extraction**: parse `ctx XX%` or `XX%` from status bar
+6. If **not in tmux**: show message and suggest running inside tmux
+
+### Integration with status
+
+When running `/team-agents status`, also show pane info if in tmux:
+
+```
+Team: whetstone-ops (active)
+
+  Agent        Status       Task                     Pane
+  ──────────── ──────────── ──────────────────────── ────
+  scout        idle         —                         3
+  builder      in_progress  Fix installer             4
+  auditor      idle         —                         5
+```
+
+---
+
 ## /team-agents --manual Mode (#219)
 
 > "You name them. You control them. They execute."
@@ -446,6 +508,49 @@ SendMessage shutdown_request → all agents
 Wait for responses (10s timeout)
 TeamDelete()
 ```
+
+---
+
+## /team-agents --panes
+
+Peek at tmux panes to see team agent processes running alongside the lead.
+
+### How it works
+
+```bash
+# 1. Get current tmux session
+SESSION=$(tmux display-message -p '#S' 2>/dev/null)
+
+# 2. List all panes in this session
+tmux list-panes -t "$SESSION" -F "#{pane_index} #{pane_width}x#{pane_height} #{pane_current_command}" 2>/dev/null
+
+# 3. Peek at each non-lead pane (capture last 3 lines for status)
+for i in $(tmux list-panes -t "$SESSION" -F "#{pane_index}" | tail -n +2); do
+  tmux capture-pane -t "$SESSION:0.$i" -p | tail -3
+done
+```
+
+### Display format
+
+```
+🖥 Team Panes — [session-name]
+
+  Pane  Model        Ctx    Status         Agent
+  ───── ──────────── ────── ────────────── ──────────
+  0     Opus 4.6     45%    ← LEAD (you)   team-lead
+  1     Sonnet 4.6    9%    idle           scout
+  2     Sonnet 4.6   11%    idle           builder
+  3     Sonnet 4.6   11%    idle           auditor
+
+  💡 Pane mapping is best-effort — matches by model + spawn order
+```
+
+### Rules
+
+1. Pane 0 is always the lead
+2. Agent panes are matched by model (Sonnet = team agents) and spawn order
+3. If not in tmux, show: "Not in a tmux session — pane view unavailable"
+4. Non-team panes (pre-existing) shown as "other" with their model info
 
 ---
 
