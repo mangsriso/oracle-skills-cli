@@ -1,21 +1,31 @@
 /**
- * Skill profiles — 3 tiers, no features.
+ * Skill profiles — 3 tiers, single source of truth.
  *
- * standard: daily driver (default) — 14 essential skills
+ * standard: daily driver (default) — 15 essential skills
  * full: all stable skills (excludes lab-only experiments)
  * lab: everything including experimental / bleeding edge
  */
 
-// Skills that are lab-only (experimental, not in standard or full)
-export const labOnly = ['bampenpien', 'contacts', 'dream', 'feel', 'fleet', 'harden', 'i-believed', 'inbox', 'machines', 'mailbox', 'morpheus', 'release', 'schedule', 'team-agents', 'vault', 'warp', 'watch', 'wormhole'];
+/** Standard profile — daily driver skills (always installed) */
+export const STANDARD_SKILLS = [
+  'about-oracle', 'awaken', 'create-shortcut', 'dig', 'forward', 'go',
+  'learn', 'oracle-family-scan', 'oracle-soul-sync-update',
+  'recap', 'rrr', 'standup', 'talk-to', 'trace', 'xray',
+] as const;
+
+/** Lab-only skills — experimental, not in standard or full */
+export const LAB_SKILLS = [
+  'bampenpien', 'contacts', 'dream', 'feel', 'fleet', 'harden',
+  'i-believed', 'inbox', 'machines', 'mailbox', 'morpheus',
+  'release', 'schedule', 'team-agents', 'vault', 'warp', 'watch', 'wormhole',
+] as const;
+
+// Backwards-compatible aliases
+export const labOnly = [...LAB_SKILLS] as string[];
 
 export const profiles: Record<string, { include?: string[]; exclude?: string[] }> = {
   standard: {
-    include: [
-      'about-oracle', 'awaken', 'create-shortcut', 'dig', 'forward', 'go',
-      'learn', 'oracle-family-scan', 'oracle-soul-sync-update',
-      'recap', 'rrr', 'standup', 'talk-to', 'trace', 'xray',
-    ],
+    include: [...STANDARD_SKILLS],
   },
   full: {
     exclude: labOnly,  // all skills except lab-only experiments

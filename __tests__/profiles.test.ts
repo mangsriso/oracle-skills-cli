@@ -1,17 +1,18 @@
 import { describe, it, expect } from "bun:test";
-import { profiles, labOnly, resolveProfile } from "../src/profiles";
+import { profiles, labOnly, STANDARD_SKILLS, LAB_SKILLS, resolveProfile } from "../src/profiles";
 
+// Simulated full skill list — must include all standard + lab + other discovered skills
 const ALL_SKILLS = [
-  "about-oracle", "auto-retrospective", "awaken", "bampenpien", "contacts", "create-shortcut",
-  "dig", "dream", "feel", "fleet", "forward", "go", "harden", "i-believed", "inbox", "incubate",
-  "learn", "machines", "mailbox", "morpheus", "oracle-family-scan", "oracle-soul-sync-update",
-  "philosophy", "project", "recap", "release", "resonance", "rrr", "schedule", "standup",
-  "talk-to", "team-agents", "trace", "vault", "warp", "watch", "where-we-are", "who-are-you",
-  "wormhole", "xray",
-];
+  ...STANDARD_SKILLS,
+  ...LAB_SKILLS,
+  // Full/other skills (not standard, not lab-only)
+  "auto-retrospective", "incubate", "philosophy", "project",
+  "resonance", "where-we-are", "who-are-you",
+].sort();
 
 describe("profiles", () => {
   it("standard has 15 skills", () => {
+    expect(STANDARD_SKILLS).toHaveLength(15);
     expect(profiles.standard.include).toHaveLength(15);
   });
 
@@ -25,27 +26,30 @@ describe("profiles", () => {
   });
 
   it("standard includes dig", () => {
-    expect(profiles.standard.include).toContain("dig");
+    expect(STANDARD_SKILLS).toContain("dig");
   });
 
   it("standard includes create-shortcut", () => {
-    expect(profiles.standard.include).toContain("create-shortcut");
+    expect(STANDARD_SKILLS).toContain("create-shortcut");
   });
 
   it("standard does NOT include dream or feel", () => {
-    expect(profiles.standard.include).not.toContain("dream");
-    expect(profiles.standard.include).not.toContain("feel");
+    expect([...STANDARD_SKILLS]).not.toContain("dream");
+    expect([...STANDARD_SKILLS]).not.toContain("feel");
   });
 
-  it("labOnly contains all experimental skills (18)", () => {
-    const expected = [
-      "bampenpien", "contacts", "dream", "feel", "fleet", "harden",
-      "i-believed", "inbox", "machines", "mailbox", "morpheus",
-      "release", "schedule", "team-agents", "vault", "warp", "watch", "wormhole",
-    ];
-    expect(labOnly).toHaveLength(expected.length);
-    for (const name of expected) {
-      expect(labOnly).toContain(name);
+  it("LAB_SKILLS has 18 experimental skills", () => {
+    expect(LAB_SKILLS).toHaveLength(18);
+  });
+
+  it("labOnly matches LAB_SKILLS", () => {
+    expect(labOnly).toEqual([...LAB_SKILLS]);
+  });
+
+  it("no overlap between STANDARD_SKILLS and LAB_SKILLS", () => {
+    const standardSet = new Set(STANDARD_SKILLS);
+    for (const skill of LAB_SKILLS) {
+      expect(standardSet.has(skill)).toBe(false);
     }
   });
 });
