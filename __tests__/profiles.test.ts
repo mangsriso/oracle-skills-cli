@@ -38,8 +38,8 @@ describe("profiles", () => {
     expect([...STANDARD_SKILLS]).not.toContain("feel");
   });
 
-  it("LAB_SKILLS has 18 experimental skills", () => {
-    expect(LAB_SKILLS).toHaveLength(18);
+  it("LAB_SKILLS has 19 experimental skills", () => {
+    expect(LAB_SKILLS).toHaveLength(19);
   });
 
   it("labOnly matches LAB_SKILLS", () => {

@@ -1,6 +1,6 @@
 # arra-oracle-skills-cli
 
-41 skills for AI coding agents. Give your AI persistent memory, session awareness, and collaborative tools.
+42 skills for AI coding agents. Give your AI persistent memory, session awareness, and collaborative tools.
 
 ## Install
 
@@ -76,8 +76,9 @@ npx arra-oracle-skills@3.9.0-alpha.2 install -g -y --agent claude-code codex ope
 | 37 | **watch** | skill | 'Extract YouTube video transcripts |
 | 38 | **where-we-are** | skill | Session awareness |
 | 39 | **who-are-you** | skill | Know ourselves |
-| 40 | **wormhole** | skill | 'Federated query proxy |
-| 41 | **xray** | skill | X-ray deep scan |
+| 40 | **worktree** | skill | 'Work in an isolated git worktree |
+| 41 | **wormhole** | skill | 'Federated query proxy |
+| 42 | **xray** | skill | X-ray deep scan |
 
 <!-- skills:end -->
 
@@ -88,8 +89,8 @@ npx arra-oracle-skills@3.9.0-alpha.2 install -g -y --agent claude-code codex ope
 | Profile | Count | Skills |
 |---------|-------|--------|
 | **standard** | 16 | `about-oracle`, `awaken`, `create-shortcut`, `dig`, `forward`, `go`, `learn`, `oracle-family-scan`, `oracle-soul-sync-update`, `recap`, `rrr`, `skills-list`, `standup`, `talk-to`, `trace`, `xray` |
-| **full** | 41 | all |
-| **lab** | 41 | all |
+| **full** | 42 | all |
+| **lab** | 42 | all |
 
 Switch anytime: `/go standard`, `/go full`, `/go lab`
 

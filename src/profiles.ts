@@ -17,7 +17,7 @@ export const STANDARD_SKILLS = [
 export const LAB_SKILLS = [
   'bampenpien', 'contacts', 'dream', 'feel', 'fleet', 'harden',
   'i-believed', 'inbox', 'machines', 'mailbox', 'morpheus',
-  'release', 'schedule', 'team-agents', 'vault', 'warp', 'watch', 'wormhole',
+  'release', 'schedule', 'team-agents', 'vault', 'warp', 'watch', 'worktree', 'wormhole',
 ] as const;
 
 // Backwards-compatible aliases
