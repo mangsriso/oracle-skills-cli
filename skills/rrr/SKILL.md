@@ -92,6 +92,8 @@ worktree, branch, PID/pane, remote-ref, and manifest removal are deferred.
 ## Coverage labels
 
 Use independently: `implemented locally`, `fixture-verified`, `runtime-verified`,
-`blocked`, and `deferred`. Literal installed duplicate-loader precedence, live install,
-always-on capture, Oracle-v2 reindex control, vault Git, all finish execution, and real
-GitHub E2E remain deferred or blocked.
+`blocked`, and `deferred`. Treat live installation and duplicate-loader precedence as
+run-specific evidence, not a permanent source claim: label each `runtime-verified` only
+after a literal fresh-process check of the current installed copies, otherwise
+`deferred`. Always-on capture, Oracle-v2 reindex control, vault Git, all finish
+execution, and real GitHub E2E remain deferred or blocked.

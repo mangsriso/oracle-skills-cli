@@ -20,7 +20,9 @@ review. A bound transcript is correlation evidence only, never authority and nev
 authority.
 
 Fresh-runtime fixtures validate content discovery, argument transport, binding, and safe
-execution separately. Literal installed precedence remains pending.
+execution separately. Live-root discovery is runtime evidence and must be rechecked
+after installation; duplicate-root precedence remains pending unless the current run
+proves which installed copy was selected.
 
 Git preview removes repository-local `GIT_*` variables before honoring its explicit
 `git -C <repo>` target. This is required when RRR is called from a Git hook: inherited
